@@ -1,0 +1,721 @@
+<title>Le Podcast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#050507;
+    --paper-raised:#15141a;
+    --ink:#f8f8fb;
+    --ink-soft:#c4c3cd;
+    --ink-faint:#87868f;
+    --line:rgba(248,248,251,0.14);
+    --accent-warm:#ff5b3c;
+    --accent-pink:#e61aa8;
+    --accent-purple:#7c3ff2;
+    --accent-blue:#3f6ef5;
+    --meta:#3f6ef5;
+    --meta-soft:rgba(63,110,245,0.16);
+    --fog:#87868f;
+    --fog-soft:rgba(135,134,143,0.14);
+    --fog-line:rgba(135,134,143,0.4);
+    --value:#e61aa8;
+    --value-soft:rgba(230,26,168,0.16);
+    --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 16px 34px -16px rgba(0,0,0,0.75);
+  }
+
+  *{box-sizing:border-box;}
+  html{background:var(--paper);}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Poppins",-apple-system,BlinkMacSystemFont,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Poppins",-apple-system,sans-serif; text-wrap:balance; margin:0;}
+  p{margin:0;}
+  ::selection{background:var(--value-soft); color:var(--ink);}
+  a{color:inherit;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--value); outline-offset:3px; border-radius:2px;}
+  button{ font-family:inherit; }
+
+  .page{
+    max-width:920px;
+    margin:0 auto;
+    padding:5.5rem 1.75rem 7rem;
+    position:relative;
+  }
+
+  .masthead{
+    padding-bottom:3.2rem;
+    margin-bottom:1.2rem;
+  }
+  .masthead h1{
+    font-size:clamp(2.2rem,5.4vw,3.4rem);
+    font-weight:700;
+    letter-spacing:-0.015em;
+    line-height:1.12;
+    max-width:22ch;
+    color:var(--ink);
+  }
+
+  .hero-band{
+    width:100%; height:clamp(64px,8vw,96px);
+    overflow:hidden; background:var(--paper);
+  }
+  .hero-band svg{ display:block; width:100%; height:100%; }
+
+  .dots{
+    position:fixed;
+    left:2rem;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex; flex-direction:column; gap:0.65rem;
+    z-index:5;
+  }
+  .dots a{
+    display:flex; align-items:center; gap:0.65rem;
+    padding:0.6rem 1.15rem 0.6rem 0.7rem;
+    border-radius:999px;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    font-family:"IBM Plex Mono",monospace;
+    font-size:0.7rem;
+    letter-spacing:0.04em;
+    color:var(--ink-soft);
+    text-decoration:none;
+    transition:background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+  .dots a:hover{ color:var(--ink); border-color:var(--fog-line); transform:translateX(3px); }
+  .dots a span{
+    width:8px; height:8px; border-radius:50%; flex:none;
+    background:var(--ink-faint);
+    transition:background 0.2s ease, transform 0.2s ease;
+  }
+  .dots a.active{
+    background:var(--value-soft);
+    border-color:var(--value);
+    color:var(--value);
+  }
+  .dots a.active span{ background:var(--value); transform:scale(1.3); }
+  @media (max-width:1180px){ .dots{display:none;} }
+
+  .sec{ padding:3.6rem 0; border-bottom:1px solid var(--line); }
+  .sec:last-of-type{border-bottom:none;}
+  .sec-head{ display:flex; align-items:baseline; gap:0.9rem; margin-bottom:1.6rem; flex-wrap:wrap; }
+  .sec-num{ font-family:"IBM Plex Mono",monospace; font-size:0.85rem; color:var(--value); font-weight:600; }
+  .sec-head h2{ font-size:clamp(1.4rem,3.2vw,1.9rem); font-weight:600; }
+  .lede{ font-size:1.08rem; line-height:1.7; color:var(--ink-soft); max-width:64ch; margin-bottom:1.6rem; }
+
+  .callout{
+    position:relative;
+    font-size:1.05rem; line-height:1.65; max-width:64ch;
+    padding:1.3rem 1.3rem 1.1rem;
+    border:1px solid var(--value);
+    border-radius:12px;
+    background:var(--value-soft);
+    margin-top:2.1rem;
+  }
+  .callout::before{
+    content:"À retenir";
+    position:absolute; top:-0.62em; left:1rem;
+    background:var(--paper);
+    padding:0 0.5em;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:0.64rem; letter-spacing:0.09em; text-transform:uppercase;
+    color:var(--value);
+  }
+  .callout strong{ color:var(--value); }
+
+  /* --- pricebox (add-to-quote control) --- */
+  .pricebox{
+    border:1px solid var(--line); border-radius:16px;
+    background:var(--paper-raised);
+    padding:1.15rem 1.3rem;
+    margin-bottom:1.8rem;
+    display:flex; flex-direction:column; gap:1rem;
+    transition:border-color .2s ease;
+  }
+  .pricebox.on{ border-color:var(--value); }
+  .pb-row{ display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+
+  .toggle{ display:inline-flex; align-items:center; gap:0.7rem; cursor:pointer; user-select:none; }
+  .toggle input{ position:absolute; opacity:0; width:1px; height:1px; }
+  .toggle-track{
+    width:38px; height:22px; border-radius:999px; flex:none;
+    background:var(--fog-soft); border:1px solid var(--line); position:relative;
+    transition:background .18s ease, border-color .18s ease;
+  }
+  .toggle-thumb{
+    position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%;
+    background:var(--ink-faint); transition:transform .18s ease, background .18s ease;
+  }
+  .toggle input:checked + .toggle-track{ background:var(--value-soft); border-color:var(--value); }
+  .toggle input:checked + .toggle-track .toggle-thumb{ transform:translateX(16px); background:var(--value); }
+  .toggle input:focus-visible + .toggle-track{ outline:2px solid var(--value); outline-offset:2px; }
+  .toggle-label{ font-size:0.92rem; font-weight:500; color:var(--ink); }
+
+  .pb-amount{ font-family:"IBM Plex Mono",monospace; font-size:1.05rem; font-weight:600; color:var(--value); white-space:nowrap; }
+  .pb-amount.quote{ font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); font-weight:600; }
+
+  .seg{ display:flex; flex-wrap:wrap; gap:0.5rem; }
+  .seg-btn{
+    font-family:"Poppins",sans-serif; font-size:0.82rem; font-weight:500;
+    padding:0.5rem 0.95rem; border-radius:999px;
+    border:1px solid var(--line); background:transparent; color:var(--ink-soft);
+    cursor:pointer; transition:border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .seg-btn:hover{ border-color:var(--fog-line); color:var(--ink); }
+  .seg-btn.active{ border-color:var(--value); color:var(--value); background:var(--value-soft); }
+
+  .stepper{ display:inline-flex; align-items:center; gap:0.75rem; }
+  .stepper-btn{
+    width:26px; height:26px; border-radius:50%; flex:none;
+    border:1px solid var(--line); background:transparent; color:var(--ink);
+    font-size:1rem; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .stepper-btn:hover{ border-color:var(--value); color:var(--value); }
+  .stepper-value{ font-family:"IBM Plex Mono",monospace; font-size:0.92rem; min-width:2.5ch; text-align:center; }
+  .stepper-unit{ font-size:0.82rem; color:var(--ink-faint); }
+
+  /* --- feature grid --- */
+  .feature-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:0.9rem; }
+  .feature-card{
+    border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.2rem;
+    background:var(--paper-raised);
+    display:flex; flex-direction:column; gap:0.45rem;
+  }
+  .feature-card .ft-label{
+    font-family:"IBM Plex Mono",monospace; font-size:0.64rem; text-transform:uppercase;
+    letter-spacing:0.06em; color:var(--ink-faint);
+  }
+  .feature-card .ft-title{ font-family:"Poppins",sans-serif; font-size:1.03rem; font-weight:600; color:var(--ink); }
+  .feature-card .ft-desc{ font-size:0.87rem; line-height:1.5; color:var(--ink-soft); }
+
+  .actions{
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:12px;
+    padding:1.5rem 1.6rem;
+  }
+  .actions h3{ font-size:1.02rem; font-weight:600; margin-bottom:1rem; }
+  .actions ol{ margin:0; padding-left:1.25rem; display:flex; flex-direction:column; gap:0.7rem; }
+  .actions li{ font-size:0.96rem; line-height:1.55; color:var(--ink-soft); }
+  .actions li strong{ color:var(--ink); }
+
+  .table-wrap{ overflow-x:auto; margin-bottom:1rem; }
+  table{ width:100%; border-collapse:collapse; min-width:480px; }
+  caption{
+    text-align:left; font-family:"IBM Plex Mono",monospace; font-size:0.7rem;
+    text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint);
+    margin-bottom:0.6rem;
+  }
+  th,td{ text-align:left; padding:0.7rem 0.9rem; border-bottom:1px solid var(--line); font-size:0.92rem; }
+  thead th{
+    font-family:"IBM Plex Mono",monospace; font-size:0.72rem; text-transform:uppercase;
+    letter-spacing:0.05em; color:var(--ink-faint); font-weight:500;
+  }
+  tbody th{ font-weight:500; color:var(--ink-soft); }
+  td.hi{ color:var(--value); font-weight:600; }
+
+  .foot{
+    margin-top:2.5rem; padding-top:1.6rem; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.6rem;
+    font-family:"IBM Plex Mono",monospace; font-size:0.7rem; color:var(--ink-faint);
+    text-transform:uppercase; letter-spacing:0.05em;
+  }
+
+  /* --- sticky quote bar --- */
+  .quote-bar{
+    position:fixed; bottom:1.4rem; left:50%; transform:translateX(-50%);
+    z-index:50;
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:999px;
+    padding:0.8rem 1.5rem; box-shadow:var(--shadow);
+    display:flex; align-items:center; gap:0.9rem;
+    max-width:calc(100vw - 2rem);
+  }
+  .quote-label{
+    font-family:"IBM Plex Mono",monospace; font-size:0.66rem; text-transform:uppercase;
+    letter-spacing:0.06em; color:var(--ink-faint); white-space:nowrap;
+  }
+  .quote-amount{ font-family:"IBM Plex Mono",monospace; font-size:1.1rem; font-weight:700; color:var(--value); white-space:nowrap; }
+  .quote-note{ font-size:0.72rem; color:var(--ink-faint); border-left:1px solid var(--line); padding-left:0.9rem; }
+  .quote-export{
+    font-family:"Poppins",sans-serif; font-size:0.8rem; font-weight:500;
+    color:var(--ink); background:transparent; cursor:pointer;
+    border:1px solid var(--line); border-radius:999px; padding:0.45rem 1rem;
+    margin-left:0.3rem; white-space:nowrap;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .quote-export:hover{ border-color:var(--value); color:var(--value); }
+  .quote-export[hidden]{ display:none; }
+
+  @media (prefers-reduced-motion: reduce){ *{ scroll-behavior:auto !important; transition:none !important; } }
+</style>
+
+<div class="hero-band" aria-hidden="true">
+  <svg viewBox="0 0 1200 220" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0.3">
+        <stop offset="0" stop-color="var(--accent-warm)"/>
+        <stop offset="0.36" stop-color="var(--accent-pink)"/>
+        <stop offset="0.68" stop-color="var(--accent-purple)"/>
+        <stop offset="1" stop-color="var(--accent-blue)"/>
+      </linearGradient>
+    </defs>
+    <path d="M -40 150 C 160 40, 320 40, 480 130 C 640 220, 800 220, 960 110 C 1060 40, 1160 40, 1260 100"
+      fill="none" stroke="url(#waveGrad)" stroke-width="34" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<div class="page">
+
+  <header class="masthead">
+    <h1>Créer et diffuser votre propre podcast</h1>
+  </header>
+
+  <nav class="dots">
+    <a href="#s1" data-idx="0"><span></span>La salle</a>
+    <a href="#s2" data-idx="1"><span></span>Vidéaste</a>
+    <a href="#s3" data-idx="2"><span></span>Montage</a>
+    <a href="#s4" data-idx="3"><span></span>Jingle</a>
+    <a href="#s5" data-idx="4"><span></span>Visuels</a>
+    <a href="#s6" data-idx="5"><span></span>Diffusion</a>
+    <a href="#s7" data-idx="6"><span></span>Suivi</a>
+  </nav>
+
+  <section id="s1" class="sec">
+    <div class="sec-head"><span class="sec-num">01</span><h2>La salle</h2></div>
+    <p class="lede">Un studio insonorisé, avec micros, caméras, éclairage et mixette inclus.</p>
+
+    <div class="pricebox" data-item="salle">
+      <div class="pb-row">
+        <label class="toggle">
+          <input type="checkbox" class="pb-check">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label">Ajouter au devis</span>
+        </label>
+        <span class="pb-amount" data-role="amount">90 €</span>
+      </div>
+      <div class="seg" data-role="options">
+        <button class="seg-btn active" data-value="1h">1h</button>
+        <button class="seg-btn" data-value="demi">Demi-journée (4h)</button>
+        <button class="seg-btn" data-value="jour">Journée (8h)</button>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="ft-label">Acoustique</span>
+        <span class="ft-title">Salle insonorisée</span>
+        <p class="ft-desc">Traitement acoustique pensé pour la voix : pas de bruit de fond, pas d'écho à corriger.</p>
+      </div>
+      <div class="feature-card">
+        <span class="ft-label">Disposition</span>
+        <span class="ft-title">Configuration prête</span>
+        <p class="ft-desc">Table, fauteuils et arrière-plan pensés pour un format à 2, 3 ou 4 personnes face caméra.</p>
+      </div>
+      <div class="feature-card">
+        <span class="ft-label">Son</span>
+        <span class="ft-title">Micros professionnels</span>
+        <p class="ft-desc">Micros cravate ou statiques selon le format, un par intervenant, réglés en amont du tournage.</p>
+      </div>
+      <div class="feature-card">
+        <span class="ft-label">Image</span>
+        <span class="ft-title">Caméras multi-plans</span>
+        <p class="ft-desc">Plusieurs caméras positionnées pour varier les angles sans interrompre la conversation.</p>
+      </div>
+      <div class="feature-card">
+        <span class="ft-label">Lumière</span>
+        <span class="ft-title">Kits d'éclairage</span>
+        <p class="ft-desc">Éclairage LED et softbox déjà positionnés pour un rendu net, sans ombre parasite.</p>
+      </div>
+      <div class="feature-card">
+        <span class="ft-label">Mixage</span>
+        <span class="ft-title">Table de mixage</span>
+        <p class="ft-desc">Contrôle des niveaux en direct et retour casque pour chaque intervenant pendant l'enregistrement.</p>
+      </div>
+    </div>
+
+    <p class="callout">Le studio et le matériel sont sur place, réglés et prêts à l'usage le jour du tournage.</p>
+  </section>
+
+  <section id="s2" class="sec">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Le vidéaste</h2></div>
+    <p class="lede">Un vidéaste de l'agence en renfort pour la prise de vue pendant l'enregistrement.</p>
+
+    <div class="pricebox" data-item="videaste">
+      <div class="pb-row">
+        <label class="toggle">
+          <input type="checkbox" class="pb-check">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label">Ajouter au devis</span>
+        </label>
+        <span class="pb-amount" data-role="amount">130 €</span>
+      </div>
+      <div class="stepper" data-role="stepper">
+        <button class="stepper-btn" data-action="dec" aria-label="Retirer une heure">−</button>
+        <span class="stepper-value" data-role="hours">1</span>
+        <span class="stepper-unit">heure(s) · 130 €/h</span>
+        <button class="stepper-btn" data-action="inc" aria-label="Ajouter une heure">+</button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <h3>Ce que fait le vidéaste</h3>
+      <ol>
+        <li><strong>Installation</strong> : réglage des caméras, cadrages et niveaux de lumière avant le tournage.</li>
+        <li><strong>Prise de vue en direct</strong> : changements de plan et d'angle pendant toute la conversation.</li>
+        <li><strong>Contrôle qualité</strong> : cadrage, netteté et lumière vérifiés en continu, sans interrompre l'enregistrement.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="s3" class="sec">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Le montage</h2></div>
+    <p class="lede">Le montage complet de l'épisode, du dérushage à la post-production son.</p>
+
+    <div class="pricebox" data-item="montage">
+      <div class="pb-row">
+        <label class="toggle">
+          <input type="checkbox" class="pb-check">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label">Ajouter au devis</span>
+        </label>
+        <span class="pb-amount" data-role="amount">280 €</span>
+      </div>
+      <div class="seg" data-role="options">
+        <button class="seg-btn active" data-value="court">Épisode ≤ 1h</button>
+        <button class="seg-btn" data-value="long">Épisode &gt; 1h</button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <h3>Ce qui est inclus dans le montage</h3>
+      <ol>
+        <li><strong>Dérushage</strong> : sélection des meilleurs passages, coupe des temps morts et des hésitations.</li>
+        <li><strong>Montage vidéo</strong> : enchaînement des plans, rythme, transitions entre les caméras.</li>
+        <li><strong>Habillage</strong> : générique, textes à l'écran, sous-titres pour la lecture sans le son.</li>
+        <li><strong>Post-production son</strong> : nettoyage, équilibrage des voix, mixage final.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="s4" class="sec">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Le jingle</h2></div>
+    <p class="lede">Une identité sonore créée et enregistrée sur mesure, utilisée en intro et outro de chaque épisode.</p>
+
+    <div class="pricebox" data-item="jingle">
+      <div class="pb-row">
+        <label class="toggle">
+          <input type="checkbox" class="pb-check">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label">Ajouter au devis</span>
+        </label>
+        <span class="pb-amount quote" data-role="amount">Sur devis</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <h3>Ce qui est inclus</h3>
+      <ol>
+        <li><strong>Composition</strong> : création d'un thème sonore court, aligné avec l'identité de la marque.</li>
+        <li><strong>Enregistrement</strong> : séance en studio, voix et/ou musique selon le format choisi.</li>
+        <li><strong>Livraison</strong> : fichier prêt à intégrer en intro et outro, réutilisable sur tous les épisodes.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="s5" class="sec">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Visuels &amp; identité</h2></div>
+    <p class="lede">Les visuels adaptés à chaque plateforme, pour un podcast reconnaissable partout où il est publié.</p>
+
+    <div class="pricebox" data-item="visuels">
+      <div class="pb-row">
+        <label class="toggle">
+          <input type="checkbox" class="pb-check">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label">Ajouter au devis</span>
+        </label>
+        <span class="pb-amount" data-role="amount">350 €</span>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="ft-label">Audio</span>
+        <span class="ft-title">Cover podcast</span>
+        <p class="ft-desc">Visuel carré pour Spotify, Deezer, Apple Podcasts et Amazon Music, cohérent sur tous les épisodes.</p>
+      </div>
+      <div class="feature-card">
+        <span class="ft-label">Vidéo</span>
+        <span class="ft-title">Miniature YouTube</span>
+        <p class="ft-desc">Format 16:9 pensé pour capter le clic dans un fil de recommandations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="s6" class="sec">
+    <div class="sec-head"><span class="sec-num">06</span><h2>La diffusion</h2></div>
+    <p class="lede">Chaque épisode adapté à sa plateforme de destination, puis mis en ligne.</p>
+
+    <div class="pricebox" data-item="diffusion">
+      <div class="pb-row">
+        <label class="toggle">
+          <input type="checkbox" class="pb-check">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label">Ajouter au devis</span>
+        </label>
+        <span class="pb-amount" data-role="amount">90 € / épisode</span>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <caption>Un même enregistrement, décliné pour chaque plateforme</caption>
+        <thead>
+          <tr><th>Plateforme</th><th>Format</th><th>Contenu publié</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Spotify</th><td>Audio</td><td class="hi">Épisode complet</td></tr>
+          <tr><th scope="row">Deezer</th><td>Audio</td><td class="hi">Épisode complet</td></tr>
+          <tr><th scope="row">Apple Podcasts</th><td>Audio</td><td class="hi">Épisode complet</td></tr>
+          <tr><th scope="row">Amazon Music</th><td>Audio</td><td class="hi">Épisode complet</td></tr>
+          <tr><th scope="row">YouTube</th><td>Vidéo horizontale</td><td class="hi">Épisode complet</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="callout">Chaque épisode est décliné et publié automatiquement sur toutes les plateformes choisies.</p>
+  </section>
+
+  <section id="s7" class="sec">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Suivi &amp; reporting</h2></div>
+    <p class="lede">Un point de suivi après chaque diffusion : ce qui a été vu, écouté et partagé.</p>
+
+    <div class="pricebox" data-item="suivi">
+      <div class="pb-row">
+        <label class="toggle">
+          <input type="checkbox" class="pb-check">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label">Ajouter au devis</span>
+        </label>
+        <span class="pb-amount quote" data-role="amount">Sur devis</span>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="ft-label">Audience</span>
+        <span class="ft-title">Vues et écoutes</span>
+        <p class="ft-desc">Volume par plateforme, pour situer chaque épisode par rapport aux précédents.</p>
+      </div>
+      <div class="feature-card">
+        <span class="ft-label">Rétention</span>
+        <span class="ft-title">Durée d'écoute</span>
+        <p class="ft-desc">Temps moyen passé sur l'épisode, en audio comme en vidéo.</p>
+      </div>
+      <div class="feature-card">
+        <span class="ft-label">Extraits</span>
+        <span class="ft-title">Meilleur extrait</span>
+        <p class="ft-desc">Le passage qui a le mieux performé sur les formats courts.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>Prestation Podcast · à la carte</span>
+    <span>7 prestations</span>
+  </footer>
+
+</div>
+
+<div class="quote-bar">
+  <span class="quote-label">Devis estimé</span>
+  <span class="quote-amount" id="quoteAmount">0 €</span>
+  <span class="quote-note" id="quoteNote" hidden></span>
+  <button class="quote-export" id="exportBtn" type="button" hidden>Exporter</button>
+</div>
+
+<script>
+  (function(){
+    var links = Array.prototype.slice.call(document.querySelectorAll('.dots a'));
+    if(links.length){
+      var sections = links.map(function(l){ return document.querySelector(l.getAttribute('href')); });
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          var idx = sections.indexOf(entry.target);
+          if(idx === -1) return;
+          if(entry.isIntersecting){
+            links.forEach(function(l){ l.classList.remove('active'); });
+            links[idx].classList.add('active');
+          }
+        });
+      }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+      sections.forEach(function(s){ if(s) io.observe(s); });
+    }
+  })();
+
+  (function(){
+    var LABELS = {
+      salle: 'La salle', videaste: 'Le vidéaste', montage: 'Le montage',
+      jingle: 'Le jingle', visuels: 'Visuels & identité',
+      diffusion: 'La diffusion', suivi: 'Suivi & reporting'
+    };
+    var state = {
+      salle:     { type:'tiered', options:{ '1h':90, 'demi':320, 'jour':560 }, selected:'1h', checked:false },
+      videaste:  { type:'hourly', rate:130, hours:1, min:1, max:10, checked:false },
+      montage:   { type:'tiered', options:{ 'court':280, 'long':420 }, selected:'court', checked:false },
+      jingle:    { type:'quote', checked:false },
+      visuels:   { type:'flat', price:350, checked:false },
+      diffusion: { type:'flat', price:90, suffix:' / épisode', checked:false },
+      suivi:     { type:'quote', checked:false }
+    };
+
+    function fmt(n){ return n.toLocaleString('fr-FR') + ' €'; }
+
+    function priceOf(id){
+      var s = state[id];
+      if(s.type === 'flat') return s.price;
+      if(s.type === 'tiered') return s.options[s.selected];
+      if(s.type === 'hourly') return s.rate * s.hours;
+      return 0;
+    }
+
+    function renderAmount(id){
+      var s = state[id];
+      var box = document.querySelector('[data-item="' + id + '"]');
+      var el = box.querySelector('[data-role="amount"]');
+      if(s.type === 'quote'){ el.textContent = 'Sur devis'; return; }
+      if(s.type === 'hourly'){ el.textContent = fmt(priceOf(id)); return; }
+      el.textContent = fmt(priceOf(id)) + (s.suffix || '');
+    }
+
+    function recomputeTotal(){
+      var total = 0, quoteCount = 0;
+      Object.keys(state).forEach(function(id){
+        var s = state[id];
+        if(!s.checked) return;
+        if(s.type === 'quote') quoteCount++;
+        else total += priceOf(id);
+      });
+      document.getElementById('quoteAmount').textContent = fmt(total);
+      var note = document.getElementById('quoteNote');
+      if(quoteCount > 0){
+        note.hidden = false;
+        note.textContent = '+ ' + quoteCount + ' prestation' + (quoteCount > 1 ? 's' : '') + ' sur devis';
+      } else {
+        note.hidden = true;
+      }
+    }
+
+    document.querySelectorAll('.pricebox').forEach(function(box){
+      var id = box.dataset.item;
+      var check = box.querySelector('.pb-check');
+
+      check.addEventListener('change', function(){
+        state[id].checked = check.checked;
+        box.classList.toggle('on', check.checked);
+        recomputeTotal();
+      });
+
+      box.querySelectorAll('.seg-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          box.querySelectorAll('.seg-btn').forEach(function(b){ b.classList.remove('active'); });
+          btn.classList.add('active');
+          state[id].selected = btn.dataset.value;
+          renderAmount(id);
+          recomputeTotal();
+        });
+      });
+
+      var stepper = box.querySelector('[data-role="stepper"]');
+      if(stepper){
+        stepper.querySelectorAll('.stepper-btn').forEach(function(btn){
+          btn.addEventListener('click', function(){
+            var s = state[id];
+            var delta = btn.dataset.action === 'inc' ? 1 : -1;
+            s.hours = Math.max(s.min, Math.min(s.max, s.hours + delta));
+            stepper.querySelector('[data-role="hours"]').textContent = s.hours;
+            renderAmount(id);
+            recomputeTotal();
+          });
+        });
+      }
+
+      renderAmount(id);
+    });
+
+    recomputeTotal();
+
+    function detailOf(id){
+      var box = document.querySelector('[data-item="' + id + '"]');
+      var active = box.querySelector('.seg-btn.active');
+      if(active) return active.textContent.trim();
+      if(id === 'videaste') return state.videaste.hours + 'h × ' + state.videaste.rate + ' €/h';
+      return '';
+    }
+
+    function buildQuoteText(){
+      var lines = [];
+      var priced = [], quoted = [], total = 0;
+      Object.keys(state).forEach(function(id){
+        var s = state[id];
+        if(!s.checked) return;
+        var label = LABELS[id];
+        var detail = detailOf(id);
+        if(s.type === 'quote'){ quoted.push(label); return; }
+        var amount = priceOf(id);
+        total += amount;
+        priced.push(label + (detail ? ' (' + detail + ')' : '') + ' : ' + fmt(amount));
+      });
+
+      lines.push('DEVIS ESTIMATIF');
+      lines.push('Le Podcast');
+      lines.push(new Date().toLocaleDateString('fr-FR'));
+      lines.push('');
+      if(priced.length){
+        lines.push('PRESTATIONS');
+        priced.forEach(function(l){ lines.push('- ' + l); });
+        lines.push('');
+      }
+      if(quoted.length){
+        lines.push('SUR DEVIS (à confirmer)');
+        quoted.forEach(function(l){ lines.push('- ' + l); });
+        lines.push('');
+      }
+      lines.push('TOTAL ESTIMÉ : ' + fmt(total));
+      if(quoted.length){
+        lines.push('(hors prestations sur devis, montant à confirmer)');
+      }
+      if(!priced.length && !quoted.length){
+        lines.push('');
+        lines.push('Aucune prestation sélectionnée.');
+      }
+      return lines.join('\n');
+    }
+
+    var exportBtn = document.getElementById('exportBtn');
+    var useDownloads = (typeof claude !== 'undefined' && claude && claude.use)
+      ? claude.use('downloads')
+      : Promise.resolve(null);
+    useDownloads.then(function(downloads){
+      if(!downloads){ return; }
+      exportBtn.hidden = false;
+      exportBtn.addEventListener('click', function(){
+        var original = exportBtn.textContent;
+        downloads.save({ filename: 'devis-podcast.txt', data: buildQuoteText() })
+          .then(function(){
+            exportBtn.textContent = 'Exporté ✓';
+            setTimeout(function(){ exportBtn.textContent = original; }, 1800);
+          })
+          .catch(function(err){
+            if(err && err.code === 'declined') return;
+            exportBtn.textContent = 'Indisponible';
+            setTimeout(function(){ exportBtn.textContent = original; }, 1800);
+          });
+      });
+    }).catch(function(){});
+  })();
+</script>
