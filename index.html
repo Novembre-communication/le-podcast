@@ -122,8 +122,29 @@
   .usage-item-desc{ font-size:0.9rem; line-height:1.5; color:var(--ink-soft); }
 
   /* --- bridge / transition --- */
-  .bridge{ padding:3.4rem 0 3rem; }
+  .bridge{ padding:3.4rem 0 2rem; }
   .bridge-text{ font-size:clamp(1.3rem,2.8vw,1.7rem); font-weight:600; line-height:1.35; color:var(--ink); max-width:38ch; }
+
+  .mode-choice{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:3.4rem; }
+  @media (max-width:600px){ .mode-choice{ grid-template-columns:1fr; } }
+  .mode-card{
+    font-family:inherit; text-align:left; cursor:pointer;
+    display:flex; flex-direction:column; gap:0.4rem;
+    padding:1.1rem 1.3rem; border-radius:14px;
+    border:1px solid var(--line); background:var(--paper-raised);
+    transition:border-color .18s ease, background .18s ease;
+  }
+  .mode-card:hover{ border-color:var(--fog-line); }
+  .mode-card.active{ border-color:var(--value); background:var(--value-soft); }
+  .mode-label{ font-size:1.15rem; font-weight:700; color:var(--ink); }
+  .mode-card.active .mode-label{ color:var(--value); }
+  .mode-desc{ font-size:0.88rem; line-height:1.45; color:var(--ink-soft); }
+  .mode-mark{
+    font-family:"IBM Plex Mono",monospace; font-size:0.66rem; text-transform:uppercase;
+    letter-spacing:0.06em; color:var(--ink-faint);
+  }
+  .mode-card.active .mode-mark{ color:var(--value); }
+  .mode-variant[hidden]{ display:none; }
 
   .dots{
     position:fixed;
@@ -132,18 +153,24 @@
     transform:translateY(-50%);
     display:flex; flex-direction:column; gap:0.65rem;
     z-index:5;
+    opacity:0; pointer-events:none;
+    transition:opacity 0.25s ease;
   }
+  .dots.visible{ opacity:1; pointer-events:auto; }
   .dots a{
     display:flex; align-items:center; gap:0.7rem;
-    padding:0.65rem 1.25rem 0.65rem 0.8rem;
-    border-radius:999px;
+    padding:0.8rem 1.1rem;
+    max-width:190px;
+    border-radius:14px;
     background:#221f28;
     border:1px solid rgba(248,248,251,0.28);
     box-shadow:var(--shadow);
     font-family:"IBM Plex Mono",monospace;
     font-size:0.72rem;
     font-weight:500;
-    letter-spacing:0.04em;
+    letter-spacing:0.02em;
+    line-height:1.35;
+    white-space:normal;
     color:var(--ink);
     text-decoration:none;
     transition:background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
@@ -344,7 +371,7 @@
   </div>
   <div class="hero-inner">
     <h1>Construisez une autorité que nul ne peut copier, et obtenez un avantage sur vos concurrents.</h1>
-    <p class="hero-sub">Le podcast vous permet de transformer votre voix en clients, en talents et en opportunités.</p>
+    <p class="hero-sub">Découvrez comment le podcast vous permet de transformer votre voix en clients, en talents et en opportunités.</p>
   </div>
 </div>
 
@@ -372,7 +399,7 @@
 
 <div class="page">
 
-  <div class="chapter">
+  <div class="chapter" id="chapitre-pourquoi">
     <h2 class="chapter-title">Pourquoi créer votre podcast ?</h2>
     <p class="chapter-sub">Le web se noie sous le contenu généré par IA. Les entreprises qui gardent une voix humaine prennent une avance mesurable, en confiance, en clients et en talents.</p>
   </div>
@@ -544,64 +571,110 @@
     </div>
   </section>
 
-  <div class="bridge">
-    <p class="bridge-text">On vous accompagne dans cette aventure, avec toutes les prestations qu'on propose.</p>
+  <div class="bridge" id="notre-prestation">
+    <p class="bridge-text">Novembre vous accompagne dans cette aventure.</p>
   </div>
 
+  <div class="mode-choice">
+    <button class="mode-card" type="button" data-mode="studio">
+      <span class="mode-mark">Option 1</span>
+      <span class="mode-label">En studio</span>
+      <span class="mode-desc">Vous venez enregistrer dans notre studio équipé.</span>
+    </button>
+    <button class="mode-card" type="button" data-mode="domicile">
+      <span class="mode-mark">Option 2</span>
+      <span class="mode-label">À domicile</span>
+      <span class="mode-desc">On se déplace chez vous, avec tout le matériel nécessaire.</span>
+    </button>
+  </div>
+
+  <div id="prestation-catalogue" hidden>
+
   <nav class="dots">
-    <a href="#s1" data-idx="0"><span></span>La salle</a>
-    <a href="#s2" data-idx="1"><span></span>Tournage</a>
-    <a href="#s3" data-idx="2"><span></span>Montage</a>
-    <a href="#s4" data-idx="3"><span></span>Jingle</a>
-    <a href="#s5" data-idx="4"><span></span>Visuels</a>
-    <a href="#s6" data-idx="5"><span></span>Diffusion</a>
-    <a href="#s7" data-idx="6"><span></span>Suivi</a>
-    <a href="#pack" data-idx="7"><span></span>Le pack</a>
+    <a href="#chapitre-pourquoi" data-idx="0"><span></span>Pourquoi créer votre podcast ?</a>
+    <a href="#notre-prestation" data-idx="1"><span></span>Notre prestation</a>
   </nav>
 
   <section id="s1" class="sec">
-    <div class="sec-head"><span class="sec-num">01</span><h2>La salle</h2></div>
-    <p class="lede">Un studio insonorisé, avec micros, caméras, éclairage et mixette inclus. Nous pouvons aussi nous déplacer dans vos locaux avec le même matériel.</p>
+    <div class="mode-variant" data-variant="studio">
+      <div class="sec-head"><span class="sec-num">01</span><h2>La salle</h2></div>
+      <p class="lede">Un studio insonorisé, avec micros, caméras, éclairage et mixette inclus.</p>
 
-    <div class="feature-grid">
-      <div class="feature-card">
-        <span class="ft-label">Acoustique</span>
-        <span class="ft-title">Salle insonorisée</span>
-        <p class="ft-desc">Traitement acoustique pensé pour la voix : pas de bruit de fond, pas d'écho à corriger.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <span class="ft-label">Acoustique</span>
+          <span class="ft-title">Salle insonorisée</span>
+          <p class="ft-desc">Traitement acoustique pensé pour la voix : pas de bruit de fond, pas d'écho à corriger.</p>
+        </div>
+        <div class="feature-card">
+          <span class="ft-label">Disposition</span>
+          <span class="ft-title">Configuration prête</span>
+          <p class="ft-desc">Table, fauteuils et arrière-plan pensés pour un format à 2, 3 ou 4 personnes face caméra.</p>
+        </div>
+        <div class="feature-card">
+          <span class="ft-label">Son</span>
+          <span class="ft-title">Micros professionnels</span>
+          <p class="ft-desc">Micros cravate ou statiques selon le format, un par intervenant, réglés en amont du tournage.</p>
+        </div>
+        <div class="feature-card">
+          <span class="ft-label">Image</span>
+          <span class="ft-title">Caméras multi-plans</span>
+          <p class="ft-desc">Plusieurs caméras positionnées pour varier les angles sans interrompre la conversation.</p>
+        </div>
+        <div class="feature-card">
+          <span class="ft-label">Lumière</span>
+          <span class="ft-title">Kits d'éclairage</span>
+          <p class="ft-desc">Éclairage LED et softbox déjà positionnés pour un rendu net, sans ombre parasite.</p>
+        </div>
+        <div class="feature-card">
+          <span class="ft-label">Mixage</span>
+          <span class="ft-title">Table de mixage</span>
+          <p class="ft-desc">Contrôle des niveaux en direct et retour casque pour chaque intervenant pendant l'enregistrement.</p>
+        </div>
       </div>
-      <div class="feature-card">
-        <span class="ft-label">Disposition</span>
-        <span class="ft-title">Configuration prête</span>
-        <p class="ft-desc">Table, fauteuils et arrière-plan pensés pour un format à 2, 3 ou 4 personnes face caméra.</p>
-      </div>
-      <div class="feature-card">
-        <span class="ft-label">Son</span>
-        <span class="ft-title">Micros professionnels</span>
-        <p class="ft-desc">Micros cravate ou statiques selon le format, un par intervenant, réglés en amont du tournage.</p>
-      </div>
-      <div class="feature-card">
-        <span class="ft-label">Image</span>
-        <span class="ft-title">Caméras multi-plans</span>
-        <p class="ft-desc">Plusieurs caméras positionnées pour varier les angles sans interrompre la conversation.</p>
-      </div>
-      <div class="feature-card">
-        <span class="ft-label">Lumière</span>
-        <span class="ft-title">Kits d'éclairage</span>
-        <p class="ft-desc">Éclairage LED et softbox déjà positionnés pour un rendu net, sans ombre parasite.</p>
-      </div>
-      <div class="feature-card">
-        <span class="ft-label">Mixage</span>
-        <span class="ft-title">Table de mixage</span>
-        <p class="ft-desc">Contrôle des niveaux en direct et retour casque pour chaque intervenant pendant l'enregistrement.</p>
-      </div>
-      <div class="feature-card">
-        <span class="ft-label">Sur site</span>
-        <span class="ft-title">On se déplace aussi</span>
-        <p class="ft-desc">Notre équipe vient enregistrer directement dans vos locaux, avec tout le matériel nécessaire.</p>
-      </div>
+
+      <p class="callout">Le studio et le matériel sont sur place, réglés et prêts à l'usage le jour du tournage.</p>
     </div>
 
-    <p class="callout">Le studio et le matériel sont sur place, réglés et prêts à l'usage le jour du tournage. En studio ou chez vous.</p>
+    <div class="mode-variant" data-variant="domicile" hidden>
+      <div class="sec-head"><span class="sec-num">01</span><h2>On se déplace</h2></div>
+      <p class="lede">Notre équipe vient enregistrer directement dans vos locaux, avec tout le matériel nécessaire.</p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <span class="ft-label">Déplacement</span>
+          <span class="ft-title">Chez vous</span>
+          <p class="ft-desc">Notre équipe vient directement dans vos bureaux, sans contrainte d'agenda studio.</p>
+        </div>
+        <div class="feature-card">
+          <span class="ft-label">Installation</span>
+          <span class="ft-title">Prête en 30 minutes</span>
+          <p class="ft-desc">Micros, caméras et éclairage installés rapidement, sans perturber votre activité.</p>
+        </div>
+        <div class="feature-card">
+          <span class="ft-label">Son</span>
+          <span class="ft-title">Micros professionnels</span>
+          <p class="ft-desc">Micros cravate ou statiques selon le format, un par intervenant, réglés en amont du tournage.</p>
+        </div>
+        <div class="feature-card">
+          <span class="ft-label">Image</span>
+          <span class="ft-title">Caméras multi-plans</span>
+          <p class="ft-desc">Plusieurs caméras positionnées pour varier les angles sans interrompre la conversation.</p>
+        </div>
+        <div class="feature-card">
+          <span class="ft-label">Lumière</span>
+          <span class="ft-title">Kits d'éclairage</span>
+          <p class="ft-desc">Éclairage LED et softbox transportés et positionnés sur place pour un rendu net.</p>
+        </div>
+        <div class="feature-card">
+          <span class="ft-label">Mixage</span>
+          <span class="ft-title">Table de mixage</span>
+          <p class="ft-desc">Contrôle des niveaux en direct et retour casque pour chaque intervenant pendant l'enregistrement.</p>
+        </div>
+      </div>
+
+      <p class="callout">Le matériel est transporté et installé chez vous, réglé et prêt à l'usage le jour du tournage.</p>
+    </div>
   </section>
 
   <section id="s2" class="sec">
@@ -714,12 +787,16 @@
 
   <section id="pack" class="sec pack-sec">
     <div class="sec-head"><h2>Le pack complet</h2></div>
-    <p class="lede">Le forfait de base : location de la salle et du matériel, vidéaste et montage. Jingle, visuels, diffusion et suivi sont proposés en option.</p>
+    <p class="lede">
+      <span class="mode-variant" data-variant="studio">Le forfait de base : location de la salle et du matériel, vidéaste et montage.</span><span class="mode-variant" data-variant="domicile" hidden>Le forfait de base : déplacement, matériel, vidéaste et montage.</span>
+      Jingle, visuels, diffusion et suivi sont proposés en option.
+    </p>
 
     <div class="pack-detail">
       <p class="group-label">Les éléments qu'on met à votre disposition</p>
       <ul>
-        <li>Studio insonorisé, matériel inclus (micros, caméras, éclairage, mixette)</li>
+        <li class="mode-variant" data-variant="studio">Studio insonorisé, matériel inclus (micros, caméras, éclairage, mixette)</li>
+        <li class="mode-variant" data-variant="domicile" hidden>Déplacement dans vos locaux, matériel inclus (micros, caméras, éclairage, mixette)</li>
         <li>Vidéaste de l'agence pendant tout le tournage</li>
         <li>Montage complet : dérushage, habillage, sous-titres, post-production son</li>
       </ul>
@@ -746,7 +823,9 @@
 
     <div class="pack-breakdown">
       <div class="pack-row">
-        <span class="pack-item">Salle &amp; matériel</span>
+        <span class="pack-item">
+          <span class="mode-variant" data-variant="studio">Salle &amp; matériel</span><span class="mode-variant" data-variant="domicile" hidden>Déplacement &amp; matériel</span>
+        </span>
         <span class="pack-detail-text" id="salleDetail"></span>
         <span class="pack-amount" id="sallePrix"></span>
       </div>
@@ -822,6 +901,8 @@
     <button class="quote-export" id="exportBtn" type="button" hidden>Exporter le devis</button>
   </section>
 
+  </div>
+
   <footer class="foot">
     <span>Prestation Podcast · pack complet</span>
     <span>Tournage + montage inclus</span>
@@ -832,20 +913,44 @@
 <script>
   (function(){
     var links = Array.prototype.slice.call(document.querySelectorAll('.dots a'));
-    if(links.length){
-      var sections = links.map(function(l){ return document.querySelector(l.getAttribute('href')); });
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-          var idx = sections.indexOf(entry.target);
-          if(idx === -1) return;
-          if(entry.isIntersecting){
-            links.forEach(function(l){ l.classList.remove('active'); });
-            links[idx].classList.add('active');
-          }
-        });
-      }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
-      sections.forEach(function(s){ if(s) io.observe(s); });
+    var navEl = document.querySelector('.dots');
+    if(!links.length || !navEl) return;
+
+    var markers = links.map(function(l){ return document.querySelector(l.getAttribute('href')); }).filter(Boolean);
+    if(!markers.length) return;
+
+    var ticking = false;
+    function update(){
+      ticking = false;
+      var vh = window.innerHeight;
+      var activeIdx = -1;
+      markers.forEach(function(m, i){
+        if(m.getBoundingClientRect().top <= vh * 0.4){ activeIdx = i; }
+      });
+      navEl.classList.toggle('visible', activeIdx >= 0);
+      links.forEach(function(l, i){ l.classList.toggle('active', i === activeIdx); });
     }
+    function onScroll(){
+      if(!ticking){ ticking = true; requestAnimationFrame(update); }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+
+  (function(){
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.mode-card'));
+    var variants = Array.prototype.slice.call(document.querySelectorAll('.mode-variant'));
+    var catalogue = document.getElementById('prestation-catalogue');
+    if(!cards.length || !variants.length) return;
+    cards.forEach(function(card){
+      card.addEventListener('click', function(){
+        var mode = card.dataset.mode;
+        cards.forEach(function(c){ c.classList.toggle('active', c === card); });
+        variants.forEach(function(v){ v.hidden = (v.dataset.variant !== mode); });
+        if(catalogue) catalogue.hidden = false;
+      });
+    });
   })();
 
   (function(){
