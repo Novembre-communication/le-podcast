@@ -129,57 +129,15 @@
   }
   .callout strong{ color:var(--value); }
 
-  /* --- pricebox (add-to-quote control) --- */
-  .pricebox{
-    border:1px solid var(--line); border-radius:16px;
-    background:var(--paper-raised);
-    padding:1.15rem 1.3rem;
-    margin-bottom:1.8rem;
-    display:flex; flex-direction:column; gap:1rem;
-    transition:border-color .2s ease;
-  }
-  .pricebox.on{ border-color:var(--value); }
-  .pb-row{ display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
-
-  .toggle{ display:inline-flex; align-items:center; gap:0.7rem; cursor:pointer; user-select:none; }
-  .toggle input{ position:absolute; opacity:0; width:1px; height:1px; }
-  .toggle-track{
-    width:38px; height:22px; border-radius:999px; flex:none;
-    background:var(--fog-soft); border:1px solid var(--line); position:relative;
-    transition:background .18s ease, border-color .18s ease;
-  }
-  .toggle-thumb{
-    position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%;
-    background:var(--ink-faint); transition:transform .18s ease, background .18s ease;
-  }
-  .toggle input:checked + .toggle-track{ background:var(--value-soft); border-color:var(--value); }
-  .toggle input:checked + .toggle-track .toggle-thumb{ transform:translateX(16px); background:var(--value); }
-  .toggle input:focus-visible + .toggle-track{ outline:2px solid var(--value); outline-offset:2px; }
-  .toggle-label{ font-size:0.92rem; font-weight:500; color:var(--ink); }
-
-  .pb-amount{ font-family:"IBM Plex Mono",monospace; font-size:1.05rem; font-weight:600; color:var(--value); white-space:nowrap; }
-  .pb-amount.quote{ font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); font-weight:600; }
-
-  .seg{ display:flex; flex-wrap:wrap; gap:0.5rem; }
-  .seg-btn{
-    font-family:"Poppins",sans-serif; font-size:0.82rem; font-weight:500;
-    padding:0.5rem 0.95rem; border-radius:999px;
-    border:1px solid var(--line); background:transparent; color:var(--ink-soft);
-    cursor:pointer; transition:border-color .15s ease, color .15s ease, background .15s ease;
-  }
-  .seg-btn:hover{ border-color:var(--fog-line); color:var(--ink); }
-  .seg-btn.active{ border-color:var(--value); color:var(--value); background:var(--value-soft); }
-
   .stepper{ display:inline-flex; align-items:center; gap:0.75rem; }
   .stepper-btn{
-    width:26px; height:26px; border-radius:50%; flex:none;
+    width:30px; height:30px; border-radius:50%; flex:none;
     border:1px solid var(--line); background:transparent; color:var(--ink);
-    font-size:1rem; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    font-size:1.05rem; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;
     transition:border-color .15s ease, color .15s ease;
   }
   .stepper-btn:hover{ border-color:var(--value); color:var(--value); }
-  .stepper-value{ font-family:"IBM Plex Mono",monospace; font-size:0.92rem; min-width:2.5ch; text-align:center; }
-  .stepper-unit{ font-size:0.82rem; color:var(--ink-faint); }
+  .stepper-value{ font-family:"IBM Plex Mono",monospace; font-size:1rem; min-width:3.5ch; text-align:center; }
 
   /* --- feature grid --- */
   .feature-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:0.9rem; }
@@ -226,26 +184,81 @@
     text-transform:uppercase; letter-spacing:0.05em;
   }
 
-  /* --- sticky quote bar --- */
-  .quote-bar{
-    position:fixed; bottom:1.4rem; left:50%; transform:translateX(-50%);
-    z-index:50;
-    background:var(--paper-raised); border:1px solid var(--line); border-radius:999px;
-    padding:0.8rem 1.5rem; box-shadow:var(--shadow);
-    display:flex; align-items:center; gap:0.9rem;
-    max-width:calc(100vw - 2rem);
+  /* --- pack section --- */
+  .pack-sec{
+    border:1px solid var(--value); border-radius:20px;
+    background:var(--paper-raised);
+    padding:2.2rem 2rem;
+    margin-top:0.5rem;
   }
-  .quote-label{
-    font-family:"IBM Plex Mono",monospace; font-size:0.66rem; text-transform:uppercase;
-    letter-spacing:0.06em; color:var(--ink-faint); white-space:nowrap;
+  .pack-sec .lede{ margin-bottom:1.8rem; }
+
+  .group-label{
+    font-family:"IBM Plex Mono",monospace; font-size:0.7rem; text-transform:uppercase;
+    letter-spacing:0.08em; color:var(--ink-faint); margin:0 0 0.9rem;
   }
-  .quote-amount{ font-family:"IBM Plex Mono",monospace; font-size:1.1rem; font-weight:700; color:var(--value); white-space:nowrap; }
-  .quote-note{ font-size:0.72rem; color:var(--ink-faint); border-left:1px solid var(--line); padding-left:0.9rem; }
+
+  .pack-detail{ margin-bottom:1.9rem; }
+  .pack-detail ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:0.55rem; }
+  .pack-detail li{ font-size:0.94rem; line-height:1.5; color:var(--ink-soft); padding-left:1.15rem; position:relative; }
+  .pack-detail li::before{ content:"•"; position:absolute; left:0; color:var(--value); }
+
+  .pack-vars{
+    display:grid; grid-template-columns:1fr 1fr; gap:1.4rem;
+    margin-bottom:1.9rem; padding:1.4rem; border:1px solid var(--line);
+    border-radius:14px; background:var(--paper);
+  }
+  @media (max-width:600px){ .pack-vars{ grid-template-columns:1fr; } }
+  .pack-var{ display:flex; flex-direction:column; gap:0.65rem; }
+  .pack-var-label{ font-size:0.84rem; color:var(--ink-soft); }
+
+  .pack-breakdown{ display:flex; flex-direction:column; gap:0; margin-bottom:1.7rem; }
+  .pack-row{
+    display:flex; align-items:baseline; justify-content:space-between; gap:1rem;
+    padding:0.75rem 0; border-bottom:1px solid var(--line); flex-wrap:wrap;
+  }
+  .pack-row .pack-item{ font-weight:600; color:var(--ink); min-width:100px; }
+  .pack-row .pack-detail-text{ font-size:0.82rem; color:var(--ink-faint); flex:1; }
+  .pack-row .pack-amount{ font-family:"IBM Plex Mono",monospace; color:var(--ink-soft); white-space:nowrap; }
+  .pack-row.pack-total{ border-bottom:none; padding-top:1rem; }
+  .pack-row.pack-total .pack-item{ font-size:1.1rem; }
+  .pack-row.pack-total .pack-amount{ font-size:1.6rem; font-weight:700; color:var(--value); }
+  .pack-row[hidden]{ display:none; }
+
+  .pack-note{ font-size:0.82rem; color:var(--ink-faint); margin:-0.6rem 0 1.7rem; }
+  .pack-note[hidden]{ display:none; }
+
+  .pack-options{ margin-bottom:1.9rem; }
+  .option-row{
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    padding:0.8rem 0; border-bottom:1px solid var(--line); flex-wrap:wrap;
+  }
+  .option-row:last-child{ border-bottom:none; }
+
+  .toggle{ display:inline-flex; align-items:center; gap:0.7rem; cursor:pointer; user-select:none; }
+  .toggle input{ position:absolute; opacity:0; width:1px; height:1px; }
+  .toggle-track{
+    width:38px; height:22px; border-radius:999px; flex:none;
+    background:var(--fog-soft); border:1px solid var(--line); position:relative;
+    transition:background .18s ease, border-color .18s ease;
+  }
+  .toggle-thumb{
+    position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%;
+    background:var(--ink-faint); transition:transform .18s ease, background .18s ease;
+  }
+  .toggle input:checked + .toggle-track{ background:var(--value-soft); border-color:var(--value); }
+  .toggle input:checked + .toggle-track .toggle-thumb{ transform:translateX(16px); background:var(--value); }
+  .toggle input:focus-visible + .toggle-track{ outline:2px solid var(--value); outline-offset:2px; }
+  .toggle-label{ font-size:0.94rem; font-weight:500; color:var(--ink); }
+
+  .option-amount{ font-family:"IBM Plex Mono",monospace; font-size:0.95rem; font-weight:600; color:var(--ink-soft); white-space:nowrap; }
+  .option-amount.quote{ font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); font-weight:600; }
+
   .quote-export{
-    font-family:"Poppins",sans-serif; font-size:0.8rem; font-weight:500;
+    font-family:"Poppins",sans-serif; font-size:0.85rem; font-weight:500;
     color:var(--ink); background:transparent; cursor:pointer;
-    border:1px solid var(--line); border-radius:999px; padding:0.45rem 1rem;
-    margin-left:0.3rem; white-space:nowrap;
+    border:1px solid var(--line); border-radius:999px; padding:0.6rem 1.3rem;
+    white-space:nowrap;
     transition:border-color .15s ease, color .15s ease;
   }
   .quote-export:hover{ border-color:var(--value); color:var(--value); }
@@ -283,27 +296,12 @@
     <a href="#s5" data-idx="4"><span></span>Visuels</a>
     <a href="#s6" data-idx="5"><span></span>Diffusion</a>
     <a href="#s7" data-idx="6"><span></span>Suivi</a>
+    <a href="#pack" data-idx="7"><span></span>Le pack</a>
   </nav>
 
   <section id="s1" class="sec">
     <div class="sec-head"><span class="sec-num">01</span><h2>La salle</h2></div>
     <p class="lede">Un studio insonorisé, avec micros, caméras, éclairage et mixette inclus.</p>
-
-    <div class="pricebox" data-item="salle">
-      <div class="pb-row">
-        <label class="toggle">
-          <input type="checkbox" class="pb-check">
-          <span class="toggle-track"><span class="toggle-thumb"></span></span>
-          <span class="toggle-label">Ajouter au devis</span>
-        </label>
-        <span class="pb-amount" data-role="amount">90 €</span>
-      </div>
-      <div class="seg" data-role="options">
-        <button class="seg-btn active" data-value="1h">1h</button>
-        <button class="seg-btn" data-value="demi">Demi-journée (4h)</button>
-        <button class="seg-btn" data-value="jour">Journée (8h)</button>
-      </div>
-    </div>
 
     <div class="feature-grid">
       <div class="feature-card">
@@ -345,51 +343,20 @@
     <div class="sec-head"><span class="sec-num">02</span><h2>Le vidéaste</h2></div>
     <p class="lede">Un vidéaste de l'agence en renfort pour la prise de vue pendant l'enregistrement.</p>
 
-    <div class="pricebox" data-item="videaste">
-      <div class="pb-row">
-        <label class="toggle">
-          <input type="checkbox" class="pb-check">
-          <span class="toggle-track"><span class="toggle-thumb"></span></span>
-          <span class="toggle-label">Ajouter au devis</span>
-        </label>
-        <span class="pb-amount" data-role="amount">130 €</span>
-      </div>
-      <div class="stepper" data-role="stepper">
-        <button class="stepper-btn" data-action="dec" aria-label="Retirer une heure">−</button>
-        <span class="stepper-value" data-role="hours">1</span>
-        <span class="stepper-unit">heure(s) · 130 €/h</span>
-        <button class="stepper-btn" data-action="inc" aria-label="Ajouter une heure">+</button>
-      </div>
-    </div>
-
     <div class="actions">
       <h3>Ce que fait le vidéaste</h3>
       <ol>
         <li><strong>Installation</strong> : réglage des caméras, cadrages et niveaux de lumière avant le tournage.</li>
+        <li><strong>Prise de son</strong> : réglage des micros et des niveaux audio pour chaque intervenant.</li>
         <li><strong>Prise de vue en direct</strong> : changements de plan et d'angle pendant toute la conversation.</li>
-        <li><strong>Contrôle qualité</strong> : cadrage, netteté et lumière vérifiés en continu, sans interrompre l'enregistrement.</li>
+        <li><strong>Contrôle qualité</strong> : cadrage, netteté, lumière et son vérifiés en continu, sans interrompre l'enregistrement.</li>
       </ol>
     </div>
   </section>
 
   <section id="s3" class="sec">
     <div class="sec-head"><span class="sec-num">03</span><h2>Le montage</h2></div>
-    <p class="lede">Le montage complet de l'épisode, du dérushage à la post-production son.</p>
-
-    <div class="pricebox" data-item="montage">
-      <div class="pb-row">
-        <label class="toggle">
-          <input type="checkbox" class="pb-check">
-          <span class="toggle-track"><span class="toggle-thumb"></span></span>
-          <span class="toggle-label">Ajouter au devis</span>
-        </label>
-        <span class="pb-amount" data-role="amount">280 €</span>
-      </div>
-      <div class="seg" data-role="options">
-        <button class="seg-btn active" data-value="court">Épisode ≤ 1h</button>
-        <button class="seg-btn" data-value="long">Épisode &gt; 1h</button>
-      </div>
-    </div>
+    <p class="lede">Le montage complet de l'épisode, du dérushage à la post-production son. Comptez environ 8 heures de montage par heure de vidéo finale.</p>
 
     <div class="actions">
       <h3>Ce qui est inclus dans le montage</h3>
@@ -406,17 +373,6 @@
     <div class="sec-head"><span class="sec-num">04</span><h2>Le jingle</h2></div>
     <p class="lede">Une identité sonore créée et enregistrée sur mesure, utilisée en intro et outro de chaque épisode.</p>
 
-    <div class="pricebox" data-item="jingle">
-      <div class="pb-row">
-        <label class="toggle">
-          <input type="checkbox" class="pb-check">
-          <span class="toggle-track"><span class="toggle-thumb"></span></span>
-          <span class="toggle-label">Ajouter au devis</span>
-        </label>
-        <span class="pb-amount quote" data-role="amount">Sur devis</span>
-      </div>
-    </div>
-
     <div class="actions">
       <h3>Ce qui est inclus</h3>
       <ol>
@@ -430,17 +386,6 @@
   <section id="s5" class="sec">
     <div class="sec-head"><span class="sec-num">05</span><h2>Visuels &amp; identité</h2></div>
     <p class="lede">Les visuels adaptés à chaque plateforme, pour un podcast reconnaissable partout où il est publié.</p>
-
-    <div class="pricebox" data-item="visuels">
-      <div class="pb-row">
-        <label class="toggle">
-          <input type="checkbox" class="pb-check">
-          <span class="toggle-track"><span class="toggle-thumb"></span></span>
-          <span class="toggle-label">Ajouter au devis</span>
-        </label>
-        <span class="pb-amount" data-role="amount">350 €</span>
-      </div>
-    </div>
 
     <div class="feature-grid">
       <div class="feature-card">
@@ -459,17 +404,6 @@
   <section id="s6" class="sec">
     <div class="sec-head"><span class="sec-num">06</span><h2>La diffusion</h2></div>
     <p class="lede">Chaque épisode adapté à sa plateforme de destination, puis mis en ligne.</p>
-
-    <div class="pricebox" data-item="diffusion">
-      <div class="pb-row">
-        <label class="toggle">
-          <input type="checkbox" class="pb-check">
-          <span class="toggle-track"><span class="toggle-thumb"></span></span>
-          <span class="toggle-label">Ajouter au devis</span>
-        </label>
-        <span class="pb-amount" data-role="amount">90 € / épisode</span>
-      </div>
-    </div>
 
     <div class="table-wrap">
       <table>
@@ -494,17 +428,6 @@
     <div class="sec-head"><span class="sec-num">07</span><h2>Suivi &amp; reporting</h2></div>
     <p class="lede">Un point de suivi après chaque diffusion : ce qui a été vu, écouté et partagé.</p>
 
-    <div class="pricebox" data-item="suivi">
-      <div class="pb-row">
-        <label class="toggle">
-          <input type="checkbox" class="pb-check">
-          <span class="toggle-track"><span class="toggle-thumb"></span></span>
-          <span class="toggle-label">Ajouter au devis</span>
-        </label>
-        <span class="pb-amount quote" data-role="amount">Sur devis</span>
-      </div>
-    </div>
-
     <div class="feature-grid">
       <div class="feature-card">
         <span class="ft-label">Audience</span>
@@ -517,25 +440,128 @@
         <p class="ft-desc">Temps moyen passé sur l'épisode, en audio comme en vidéo.</p>
       </div>
       <div class="feature-card">
-        <span class="ft-label">Extraits</span>
-        <span class="ft-title">Meilleur extrait</span>
-        <p class="ft-desc">Le passage qui a le mieux performé sur les formats courts.</p>
+        <span class="ft-label">Plateformes</span>
+        <span class="ft-title">Répartition des écoutes</span>
+        <p class="ft-desc">Comparatif entre Spotify, Deezer, Apple Podcasts, Amazon Music et YouTube.</p>
       </div>
     </div>
   </section>
 
+  <section id="pack" class="sec pack-sec">
+    <div class="sec-head"><h2>Le pack complet</h2></div>
+    <p class="lede">Le forfait de base : location de la salle et du matériel, vidéaste et montage. Jingle, visuels, diffusion et suivi sont proposés en option.</p>
+
+    <div class="pack-detail">
+      <p class="group-label">Les éléments qu'on met à votre disposition</p>
+      <ul>
+        <li>Studio insonorisé, matériel inclus (micros, caméras, éclairage, mixette)</li>
+        <li>Vidéaste de l'agence pendant tout le tournage</li>
+        <li>Montage complet : dérushage, habillage, sous-titres, post-production son</li>
+      </ul>
+    </div>
+
+    <div class="pack-vars">
+      <div class="pack-var">
+        <span class="pack-var-label">Durée de l'épisode (vidéo finale)</span>
+        <div class="stepper" data-role="duree">
+          <button class="stepper-btn" data-action="dec" aria-label="Réduire la durée">−</button>
+          <span class="stepper-value" data-role="value">1h</span>
+          <button class="stepper-btn" data-action="inc" aria-label="Augmenter la durée">+</button>
+        </div>
+      </div>
+      <div class="pack-var">
+        <span class="pack-var-label">Podcasts à enregistrer dans la session</span>
+        <div class="stepper" data-role="nombre">
+          <button class="stepper-btn" data-action="dec" aria-label="Retirer un podcast">−</button>
+          <span class="stepper-value" data-role="value">1</span>
+          <button class="stepper-btn" data-action="inc" aria-label="Ajouter un podcast">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pack-breakdown">
+      <div class="pack-row">
+        <span class="pack-item">Salle &amp; matériel</span>
+        <span class="pack-detail-text" id="salleDetail"></span>
+        <span class="pack-amount" id="sallePrix"></span>
+      </div>
+      <div class="pack-row">
+        <span class="pack-item">Vidéaste</span>
+        <span class="pack-detail-text" id="videasteDetail"></span>
+        <span class="pack-amount" id="videastePrix"></span>
+      </div>
+      <div class="pack-row">
+        <span class="pack-item">Montage</span>
+        <span class="pack-detail-text" id="montageDetail"></span>
+        <span class="pack-amount" id="montagePrix"></span>
+      </div>
+      <div class="pack-row" id="visuelsRow" hidden>
+        <span class="pack-item">Visuels &amp; identité</span>
+        <span class="pack-detail-text">Pack cover + miniature, forfait unique</span>
+        <span class="pack-amount">350 €</span>
+      </div>
+      <div class="pack-row" id="diffusionRow" hidden>
+        <span class="pack-item">Diffusion</span>
+        <span class="pack-detail-text" id="diffusionDetail"></span>
+        <span class="pack-amount" id="diffusionPrix"></span>
+      </div>
+      <div class="pack-row pack-total">
+        <span class="pack-item">Total pack</span>
+        <span class="pack-detail-text"></span>
+        <span class="pack-amount" id="packTotal"></span>
+      </div>
+    </div>
+
+    <p class="pack-note" id="packNote" hidden></p>
+
+    <div class="pack-options">
+      <p class="group-label">Options</p>
+
+      <div class="option-row" data-item="jingle">
+        <label class="toggle">
+          <input type="checkbox" class="opt-check">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label">Le jingle</span>
+        </label>
+        <span class="option-amount quote">Sur devis</span>
+      </div>
+
+      <div class="option-row" data-item="visuels">
+        <label class="toggle">
+          <input type="checkbox" class="opt-check">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label">Visuels &amp; identité</span>
+        </label>
+        <span class="option-amount">350 €</span>
+      </div>
+
+      <div class="option-row" data-item="diffusion">
+        <label class="toggle">
+          <input type="checkbox" class="opt-check">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label">Diffusion</span>
+        </label>
+        <span class="option-amount" id="diffusionOptAmount">150 €</span>
+      </div>
+
+      <div class="option-row" data-item="suivi">
+        <label class="toggle">
+          <input type="checkbox" class="opt-check">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label">Suivi &amp; reporting</span>
+        </label>
+        <span class="option-amount quote">Sur devis</span>
+      </div>
+    </div>
+
+    <button class="quote-export" id="exportBtn" type="button" hidden>Exporter le devis</button>
+  </section>
+
   <footer class="foot">
-    <span>Prestation Podcast · à la carte</span>
-    <span>7 prestations</span>
+    <span>Prestation Podcast · pack complet</span>
+    <span>Tournage + montage inclus</span>
   </footer>
 
-</div>
-
-<div class="quote-bar">
-  <span class="quote-label">Devis estimé</span>
-  <span class="quote-amount" id="quoteAmount">0 €</span>
-  <span class="quote-note" id="quoteNote" hidden></span>
-  <button class="quote-export" id="exportBtn" type="button" hidden>Exporter</button>
 </div>
 
 <script>
@@ -558,140 +584,139 @@
   })();
 
   (function(){
-    var LABELS = {
-      salle: 'La salle', videaste: 'Le vidéaste', montage: 'Le montage',
-      jingle: 'Le jingle', visuels: 'Visuels & identité',
-      diffusion: 'La diffusion', suivi: 'Suivi & reporting'
-    };
-    var state = {
-      salle:     { type:'tiered', options:{ '1h':90, 'demi':320, 'jour':560 }, selected:'1h', checked:false },
-      videaste:  { type:'hourly', rate:130, hours:1, min:1, max:10, checked:false },
-      montage:   { type:'tiered', options:{ 'court':280, 'long':420 }, selected:'court', checked:false },
-      jingle:    { type:'quote', checked:false },
-      visuels:   { type:'flat', price:350, checked:false },
-      diffusion: { type:'flat', price:90, suffix:' / épisode', checked:false },
-      suivi:     { type:'quote', checked:false }
-    };
+    var VIDEASTE_RATE = 130;
+    var SALLE_RATE = 70;
+    var INSTALLATION_MIN = 45;
+    var MONTAGE_RATIO = 8;
+    var VISUELS_PRIX = 350;
+    var DIFFUSION_PRIX_UNITAIRE = 150;
+    var pack = { dureeMin: 60, nombre: 1, dureeStep: 20, dureeFloor: 20, dureeCeil: 240, nombreMin: 1, nombreMax: 8 };
+    var options = { jingle: false, visuels: false, diffusion: false, suivi: false };
 
-    function fmt(n){ return n.toLocaleString('fr-FR') + ' €'; }
-
-    function priceOf(id){
-      var s = state[id];
-      if(s.type === 'flat') return s.price;
-      if(s.type === 'tiered') return s.options[s.selected];
-      if(s.type === 'hourly') return s.rate * s.hours;
-      return 0;
+    function fmt(n){ return Math.round(n).toLocaleString('fr-FR') + ' €'; }
+    function fmtDuree(minutes){
+      var h = Math.floor(minutes / 60), m = minutes % 60;
+      if(h === 0) return m + 'min';
+      if(m === 0) return h + 'h';
+      return h + 'h' + (m < 10 ? '0' + m : m);
     }
 
-    function renderAmount(id){
-      var s = state[id];
-      var box = document.querySelector('[data-item="' + id + '"]');
-      var el = box.querySelector('[data-role="amount"]');
-      if(s.type === 'quote'){ el.textContent = 'Sur devis'; return; }
-      if(s.type === 'hourly'){ el.textContent = fmt(priceOf(id)); return; }
-      el.textContent = fmt(priceOf(id)) + (s.suffix || '');
+    function compute(){
+      var tournageMin = (pack.dureeMin + INSTALLATION_MIN) * pack.nombre;
+      var montageMin = MONTAGE_RATIO * pack.dureeMin * pack.nombre;
+      var diffusionPrix = DIFFUSION_PRIX_UNITAIRE * pack.nombre;
+      var sallePrix = (tournageMin / 60) * SALLE_RATE;
+      var videastePrix = (tournageMin / 60) * VIDEASTE_RATE;
+      var montagePrix = (montageMin / 60) * VIDEASTE_RATE;
+      var total = sallePrix + videastePrix + montagePrix;
+      if(options.visuels) total += VISUELS_PRIX;
+      if(options.diffusion) total += diffusionPrix;
+      return {
+        tournageMin: tournageMin,
+        montageMin: montageMin,
+        sallePrix: sallePrix,
+        videastePrix: videastePrix,
+        montagePrix: montagePrix,
+        diffusionPrix: diffusionPrix,
+        total: total,
+        quoteCount: (options.jingle ? 1 : 0) + (options.suivi ? 1 : 0)
+      };
     }
 
-    function recomputeTotal(){
-      var total = 0, quoteCount = 0;
-      Object.keys(state).forEach(function(id){
-        var s = state[id];
-        if(!s.checked) return;
-        if(s.type === 'quote') quoteCount++;
-        else total += priceOf(id);
-      });
-      document.getElementById('quoteAmount').textContent = fmt(total);
-      var note = document.getElementById('quoteNote');
-      if(quoteCount > 0){
+    function render(){
+      var c = compute();
+      document.querySelector('[data-role="duree"] [data-role="value"]').textContent = fmtDuree(pack.dureeMin);
+      document.querySelector('[data-role="nombre"] [data-role="value"]').textContent = pack.nombre;
+
+      var tournageLabel = pack.nombre + ' podcast' + (pack.nombre > 1 ? 's' : '') + ' × (' + fmtDuree(pack.dureeMin) + ' + 45min installation) = ' + fmtDuree(c.tournageMin);
+      document.getElementById('salleDetail').textContent = tournageLabel + ' × ' + SALLE_RATE + ' €/h';
+      document.getElementById('sallePrix').textContent = fmt(c.sallePrix);
+      document.getElementById('videasteDetail').textContent = tournageLabel + ' × ' + VIDEASTE_RATE + ' €/h';
+      document.getElementById('videastePrix').textContent = fmt(c.videastePrix);
+
+      document.getElementById('montageDetail').textContent =
+        pack.nombre + ' podcast' + (pack.nombre > 1 ? 's' : '') + ' × ' + fmtDuree(pack.dureeMin) + ' × 8 = ' + fmtDuree(c.montageMin);
+      document.getElementById('montagePrix').textContent = fmt(c.montagePrix);
+
+      document.getElementById('visuelsRow').hidden = !options.visuels;
+
+      document.getElementById('diffusionRow').hidden = !options.diffusion;
+      document.getElementById('diffusionDetail').textContent =
+        pack.nombre + ' épisode' + (pack.nombre > 1 ? 's' : '') + ' × 150 €';
+      document.getElementById('diffusionPrix').textContent = fmt(c.diffusionPrix);
+      document.getElementById('diffusionOptAmount').textContent = fmt(c.diffusionPrix);
+
+      document.getElementById('packTotal').textContent = fmt(c.total);
+
+      var note = document.getElementById('packNote');
+      if(c.quoteCount > 0){
         note.hidden = false;
-        note.textContent = '+ ' + quoteCount + ' prestation' + (quoteCount > 1 ? 's' : '') + ' sur devis';
+        note.textContent = '+ ' + c.quoteCount + ' option' + (c.quoteCount > 1 ? 's' : '') + ' sur devis, hors total ci-dessus';
       } else {
         note.hidden = true;
       }
     }
 
-    document.querySelectorAll('.pricebox').forEach(function(box){
-      var id = box.dataset.item;
-      var check = box.querySelector('.pb-check');
-
-      check.addEventListener('change', function(){
-        state[id].checked = check.checked;
-        box.classList.toggle('on', check.checked);
-        recomputeTotal();
-      });
-
-      box.querySelectorAll('.seg-btn').forEach(function(btn){
+    document.querySelectorAll('.stepper').forEach(function(stepper){
+      var role = stepper.dataset.role;
+      stepper.querySelectorAll('.stepper-btn').forEach(function(btn){
         btn.addEventListener('click', function(){
-          box.querySelectorAll('.seg-btn').forEach(function(b){ b.classList.remove('active'); });
-          btn.classList.add('active');
-          state[id].selected = btn.dataset.value;
-          renderAmount(id);
-          recomputeTotal();
+          var delta = btn.dataset.action === 'inc' ? 1 : -1;
+          if(role === 'duree'){
+            pack.dureeMin = Math.max(pack.dureeFloor, Math.min(pack.dureeCeil, pack.dureeMin + delta * pack.dureeStep));
+          } else {
+            pack.nombre = Math.max(pack.nombreMin, Math.min(pack.nombreMax, pack.nombre + delta));
+          }
+          render();
         });
       });
-
-      var stepper = box.querySelector('[data-role="stepper"]');
-      if(stepper){
-        stepper.querySelectorAll('.stepper-btn').forEach(function(btn){
-          btn.addEventListener('click', function(){
-            var s = state[id];
-            var delta = btn.dataset.action === 'inc' ? 1 : -1;
-            s.hours = Math.max(s.min, Math.min(s.max, s.hours + delta));
-            stepper.querySelector('[data-role="hours"]').textContent = s.hours;
-            renderAmount(id);
-            recomputeTotal();
-          });
-        });
-      }
-
-      renderAmount(id);
     });
 
-    recomputeTotal();
+    document.querySelectorAll('.option-row').forEach(function(row){
+      var id = row.dataset.item;
+      var check = row.querySelector('.opt-check');
+      check.addEventListener('change', function(){
+        options[id] = check.checked;
+        render();
+      });
+    });
 
-    function detailOf(id){
-      var box = document.querySelector('[data-item="' + id + '"]');
-      var active = box.querySelector('.seg-btn.active');
-      if(active) return active.textContent.trim();
-      if(id === 'videaste') return state.videaste.hours + 'h × ' + state.videaste.rate + ' €/h';
-      return '';
-    }
+    render();
 
     function buildQuoteText(){
+      var c = compute();
       var lines = [];
-      var priced = [], quoted = [], total = 0;
-      Object.keys(state).forEach(function(id){
-        var s = state[id];
-        if(!s.checked) return;
-        var label = LABELS[id];
-        var detail = detailOf(id);
-        if(s.type === 'quote'){ quoted.push(label); return; }
-        var amount = priceOf(id);
-        total += amount;
-        priced.push(label + (detail ? ' (' + detail + ')' : '') + ' : ' + fmt(amount));
-      });
-
       lines.push('DEVIS ESTIMATIF');
-      lines.push('Le Podcast');
+      lines.push('Le Podcast, pack complet');
       lines.push(new Date().toLocaleDateString('fr-FR'));
       lines.push('');
-      if(priced.length){
-        lines.push('PRESTATIONS');
-        priced.forEach(function(l){ lines.push('- ' + l); });
+      lines.push('Durée de l\'épisode : ' + fmtDuree(pack.dureeMin));
+      lines.push('Podcasts enregistrés dans la session : ' + pack.nombre);
+      lines.push('');
+      var tournageLabel = pack.nombre + ' podcast' + (pack.nombre > 1 ? 's' : '') + ' × (' + fmtDuree(pack.dureeMin) + ' + 45min installation) = ' + fmtDuree(c.tournageMin);
+      lines.push('PACK DE BASE : salle, matériel, vidéaste, montage');
+      lines.push('Salle & matériel (' + tournageLabel + ' × ' + SALLE_RATE + ' €/h) : ' + fmt(c.sallePrix));
+      lines.push('Vidéaste (' + tournageLabel + ' × ' + VIDEASTE_RATE + ' €/h) : ' + fmt(c.videastePrix));
+      lines.push('Montage (' + pack.nombre + ' podcast' + (pack.nombre > 1 ? 's' : '') + ' × ' + fmtDuree(pack.dureeMin) + ' × 8 = ' + fmtDuree(c.montageMin) + ') : ' + fmt(c.montagePrix));
+
+      if(options.visuels || options.diffusion){
         lines.push('');
+        lines.push('OPTIONS');
+        if(options.visuels) lines.push('Visuels & identité : ' + fmt(VISUELS_PRIX));
+        if(options.diffusion) lines.push('Diffusion (' + pack.nombre + ' épisode' + (pack.nombre > 1 ? 's' : '') + ' × 150 €) : ' + fmt(c.diffusionPrix));
       }
-      if(quoted.length){
+
+      if(options.jingle || options.suivi){
+        lines.push('');
         lines.push('SUR DEVIS (à confirmer)');
-        quoted.forEach(function(l){ lines.push('- ' + l); });
-        lines.push('');
+        if(options.jingle) lines.push('Le jingle');
+        if(options.suivi) lines.push('Suivi & reporting');
       }
-      lines.push('TOTAL ESTIMÉ : ' + fmt(total));
-      if(quoted.length){
-        lines.push('(hors prestations sur devis, montant à confirmer)');
-      }
-      if(!priced.length && !quoted.length){
-        lines.push('');
-        lines.push('Aucune prestation sélectionnée.');
+
+      lines.push('');
+      lines.push('TOTAL PACK : ' + fmt(c.total));
+      if(c.quoteCount > 0){
+        lines.push('(hors options sur devis, montant à confirmer)');
       }
       return lines.join('\n');
     }
