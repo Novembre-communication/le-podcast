@@ -43,36 +43,87 @@
   .page{
     max-width:920px;
     margin:0 auto;
-    padding:5.5rem 1.75rem 7rem;
+    padding:0 1.75rem 7rem;
     position:relative;
   }
 
-  .masthead{
-    padding-bottom:1rem;
-    margin-bottom:0.4rem;
+  /* --- hero --- */
+  .hero{
+    width:100%; position:relative; overflow:hidden;
+    background:var(--paper);
+    padding:clamp(4rem,10vw,6.5rem) 1.75rem clamp(3rem,7vw,4.5rem);
   }
-  .masthead h1{
-    font-size:clamp(2.2rem,5.4vw,3.4rem);
-    font-weight:700;
-    letter-spacing:-0.015em;
-    line-height:1.12;
-    max-width:22ch;
-    color:var(--ink);
+  .hero-wave-bg{ position:absolute; inset:0; z-index:0; }
+  .hero-wave-bg svg{ width:100%; height:100%; display:block; }
+  .hero-inner{ max-width:920px; margin:0 auto; position:relative; z-index:1; }
+  .hero h1{
+    font-size:clamp(2rem,4.6vw,3rem); font-weight:700; letter-spacing:-0.015em;
+    line-height:1.14; max-width:30ch; color:var(--ink); margin-bottom:1.3rem;
   }
-  .dek{
-    font-size:clamp(1.4rem,3.2vw,2rem);
-    font-weight:600;
-    line-height:1.25;
-    color:#ffffff;
-    max-width:26ch;
-    margin-top:4.5rem;
-  }
+  .hero-sub{ font-size:clamp(1.05rem,2vw,1.25rem); line-height:1.6; color:var(--ink-soft); max-width:44ch; }
 
-  .hero-band{
-    width:100%; height:clamp(64px,8vw,96px);
-    overflow:hidden; background:var(--paper);
+  .chapter{ padding:3rem 0 0.5rem; }
+  .chapter-title{ font-size:clamp(1.8rem,4vw,2.6rem); font-weight:700; color:var(--ink); line-height:1.15; max-width:22ch; margin-bottom:0.9rem; }
+  .chapter-sub{ font-size:clamp(1.02rem,1.8vw,1.18rem); line-height:1.6; color:var(--ink-soft); max-width:56ch; }
+
+  /* --- stats band --- */
+  .stats-band{
+    width:100%; background:var(--paper-raised);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:2.6rem 1.75rem;
   }
-  .hero-band svg{ display:block; width:100%; height:100%; }
+  .stats-inner{
+    max-width:920px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1.6rem 1.4rem;
+  }
+  @media (max-width:760px){ .stats-inner{ grid-template-columns:repeat(2,1fr); } }
+  .stat-tile{ display:flex; flex-direction:column; gap:0.4rem; }
+  .stat-num{ font-size:clamp(1.7rem,4vw,2.3rem); font-weight:700; color:var(--value); line-height:1; }
+  .stat-label{ font-size:0.82rem; line-height:1.4; color:var(--ink-soft); }
+  .stats-source{ max-width:920px; margin:1.7rem auto 0; font-size:0.7rem; color:var(--ink-faint); }
+
+  /* --- usage section --- */
+  .argument-sec{ padding:4rem 0 3.6rem; border-bottom:1px solid var(--line); }
+
+  .compare-grid2{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:2rem 0; }
+  @media (max-width:600px){ .compare-grid2{ grid-template-columns:1fr; } }
+  .compare-card{ border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.5rem; background:var(--paper-raised); }
+  .compare-card.highlight{ border-color:var(--value); background:var(--value-soft); }
+  .compare-label{
+    font-family:"IBM Plex Mono",monospace; font-size:0.72rem; text-transform:uppercase;
+    letter-spacing:0.06em; color:var(--ink-faint); display:block; margin-bottom:0.6rem;
+  }
+  .compare-card.highlight .compare-label{ color:var(--value); }
+  .compare-text{ font-size:0.95rem; line-height:1.55; color:var(--ink-soft); }
+  .compare-card.highlight .compare-text{ color:var(--ink); }
+
+  .stat-row{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem;
+    margin:2rem 0 1rem; padding:1.6rem; border:1px solid var(--line);
+    border-radius:14px; background:var(--paper-raised);
+  }
+  @media (max-width:700px){ .stat-row{ grid-template-columns:1fr; gap:1.4rem; } }
+  .stat-row .stat-tile{ gap:0.35rem; }
+  .stat-source{ font-size:0.7rem; color:var(--ink-faint); margin-top:0.7rem; }
+
+  .chart-row{ display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; margin:2rem 0 0.6rem; }
+  @media (max-width:760px){ .chart-row{ grid-template-columns:1fr; } }
+  .chart-card{ border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.5rem 1.2rem; background:var(--paper-raised); }
+  .chart-title{ font-size:0.92rem; font-weight:600; color:var(--ink); margin-bottom:1rem; }
+  .chart-card svg{ display:block; width:100%; height:auto; }
+  .chart-source{ font-size:0.7rem; color:var(--ink-faint); margin-top:0.8rem; }
+
+  .usage-sec{ padding:4rem 0 3.6rem; border-bottom:1px solid var(--line); }
+  .usage-grid{ display:grid; grid-template-columns:1fr 1fr; gap:0 2.4rem; margin-top:2.2rem; }
+  @media (max-width:700px){ .usage-grid{ grid-template-columns:1fr; gap:2.2rem 0; } }
+  .usage-item{ padding:1rem 0; border-bottom:1px solid var(--line); }
+  .usage-item:last-child{ border-bottom:none; }
+  .usage-item-title{ font-weight:600; color:var(--ink); margin-bottom:0.35rem; display:block; }
+  .usage-item-desc{ font-size:0.9rem; line-height:1.5; color:var(--ink-soft); }
+
+  /* --- bridge / transition --- */
+  .bridge{ padding:3.4rem 0 3rem; }
+  .bridge-text{ font-size:clamp(1.3rem,2.8vw,1.7rem); font-weight:600; line-height:1.35; color:var(--ink); max-width:38ch; }
 
   .dots{
     position:fixed;
@@ -276,27 +327,226 @@
   @media (prefers-reduced-motion: reduce){ *{ scroll-behavior:auto !important; transition:none !important; } }
 </style>
 
-<div class="hero-band" aria-hidden="true">
-  <svg viewBox="0 0 1200 220" preserveAspectRatio="none">
-    <defs>
-      <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0.3">
-        <stop offset="0" stop-color="var(--accent-warm)"/>
-        <stop offset="0.36" stop-color="var(--accent-pink)"/>
-        <stop offset="0.68" stop-color="var(--accent-purple)"/>
-        <stop offset="1" stop-color="var(--accent-blue)"/>
-      </linearGradient>
-    </defs>
-    <path d="M -40 150 C 160 40, 320 40, 480 130 C 640 220, 800 220, 960 110 C 1060 40, 1160 40, 1260 100"
-      fill="none" stroke="url(#waveGrad)" stroke-width="34" stroke-linecap="round"/>
-  </svg>
+<div class="hero">
+  <div class="hero-wave-bg" aria-hidden="true">
+    <svg viewBox="0 0 1200 480" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0.3">
+          <stop offset="0" stop-color="var(--accent-warm)"/>
+          <stop offset="0.36" stop-color="var(--accent-pink)"/>
+          <stop offset="0.68" stop-color="var(--accent-purple)"/>
+          <stop offset="1" stop-color="var(--accent-blue)"/>
+        </linearGradient>
+      </defs>
+      <path d="M -80 380 C 160 160, 360 160, 560 320 C 760 480, 960 480, 1140 300 C 1220 210, 1280 160, 1360 140"
+        fill="none" stroke="url(#waveGrad)" stroke-width="46" stroke-linecap="round" opacity="0.5"/>
+    </svg>
+  </div>
+  <div class="hero-inner">
+    <h1>Construisez une autorité que nul ne peut copier, et obtenez un avantage sur vos concurrents.</h1>
+    <p class="hero-sub">Le podcast vous permet de transformer votre voix en clients, en talents et en opportunités.</p>
+  </div>
+</div>
+
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="stat-tile">
+      <span class="stat-num">1 Md+</span>
+      <span class="stat-label">auditeurs mensuels de podcasts sur YouTube, dans le monde</span>
+    </div>
+    <div class="stat-tile">
+      <span class="stat-num">47 %</span>
+      <span class="stat-label">des Français écoutent des podcasts régulièrement</span>
+    </div>
+    <div class="stat-tile">
+      <span class="stat-num">40 %</span>
+      <span class="stat-label">découvrent leur podcast sur YouTube, la 1ère plateforme</span>
+    </div>
+    <div class="stat-tile">
+      <span class="stat-num">+9 %/an</span>
+      <span class="stat-label">croissance du marché du podcast en France depuis 2020</span>
+    </div>
+  </div>
+  <p class="stats-source">Sources : Kodea, Les Makers, PodcastNews.fr (2025-2026)</p>
 </div>
 
 <div class="page">
 
-  <header class="masthead">
-    <h1>Créer et diffuser votre propre podcast</h1>
-    <p class="dek">Les éléments qu'on met à votre disposition</p>
-  </header>
+  <div class="chapter">
+    <h2 class="chapter-title">Pourquoi créer votre podcast ?</h2>
+    <p class="chapter-sub">Le web se noie sous le contenu généré par IA. Les entreprises qui gardent une voix humaine prennent une avance mesurable, en confiance, en clients et en talents.</p>
+  </div>
+
+  <section class="argument-sec">
+    <div class="sec-head"><h2>Le format long, un vrai levier de confiance</h2></div>
+    <p class="lede">Le format court attire l'attention. Le format long la transforme en confiance, et c'est cette confiance qui fait acheter, recruter et fidéliser.</p>
+
+    <div class="compare-grid2">
+      <div class="compare-card">
+        <span class="compare-label">Format court</span>
+        <p class="compare-text">Génère de la reconnaissance et sert de point d'entrée. S'oublie aussi vite qu'il se consomme.</p>
+      </div>
+      <div class="compare-card highlight">
+        <span class="compare-label">Format long</span>
+        <p class="compare-text">Construit la crédibilité et installe une relation durable avec l'audience.</p>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-tile">
+        <span class="stat-num">81 %</span>
+        <span class="stat-label">des auditeurs font confiance aux recommandations d'un host de podcast</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num">63 %</span>
+        <span class="stat-label">font plus confiance à leur podcasteur favori qu'à leur influenceur préféré</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num">53 %</span>
+        <span class="stat-label">ont une opinion plus positive d'une marque présente dans un podcast qu'ils écoutent régulièrement</span>
+      </div>
+    </div>
+    <p class="stat-source">Sources : Sounds Profitable &amp; Edison Research, Spotify Advertising, Audacy (2022-2026)</p>
+  </section>
+
+  <section class="argument-sec">
+    <div class="sec-head"><h2>Le personal branding, une ressource rare à l'ère de l'IA</h2></div>
+    <p class="lede">Le web se remplit de contenu généré par IA. Une voix humaine reconnaissable est devenue l'un des actifs les plus rares, et les mieux valorisés.</p>
+
+    <div class="stat-row">
+      <div class="stat-tile">
+        <span class="stat-num">74 %</span>
+        <span class="stat-label">des nouvelles pages web publiées contiennent du contenu généré par IA</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num">58 %</span>
+        <span class="stat-label">du contenu récent en ligne porte les signes d'une IA de faible qualité</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num">52 %</span>
+        <span class="stat-label">des lecteurs décrochent dès qu'ils repèrent du contenu généré par IA</span>
+      </div>
+    </div>
+    <p class="stat-source">Sources : Ahrefs, Stanford Internet Observatory (2025-2026)</p>
+
+    <div class="stat-row">
+      <div class="stat-tile">
+        <span class="stat-num">8×</span>
+        <span class="stat-label">plus d'engagement pour un contenu publié par une personne que par une page entreprise</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num">58 %</span>
+        <span class="stat-label">des décideurs B2B ont choisi un prestataire pour son contenu thought leadership</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num">77 %</span>
+        <span class="stat-label">des salariés sont plus enclins à rejoindre une entreprise dont le dirigeant communique activement</span>
+      </div>
+    </div>
+    <p class="stat-source">Sources : Edelman × LinkedIn, HubSpot (2026)</p>
+
+    <p class="callout">Le podcast fait partie des canaux prioritaires pour le personal branding en 2026, aux côtés de LinkedIn et de la newsletter. Un format long, incarné, difficile à reproduire par une IA.</p>
+  </section>
+
+  <section class="argument-sec">
+    <div class="sec-head"><h2>Un marché en pleine expansion</h2></div>
+    <p class="lede">Ce n'est pas une mode : c'est un marché qui grandit chaque année, en France comme dans le monde.</p>
+
+    <div class="chart-row">
+      <div class="chart-card">
+        <p class="chart-title">Part des Français qui écoutent des podcasts régulièrement</p>
+        <svg viewBox="0 0 320 190" role="img" aria-label="Part des Français qui écoutent des podcasts régulièrement : 38% en 2023, 44% en 2024, 47% en 2025">
+          <line x1="30" y1="150" x2="300" y2="150" stroke="var(--line)" stroke-width="1"/>
+          <polyline points="60,51 165,36 270,28" fill="none" stroke="var(--value)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="60" cy="51" r="5" fill="var(--value)"/>
+          <circle cx="165" cy="36" r="5" fill="var(--value)"/>
+          <circle cx="270" cy="28" r="5" fill="var(--value)"/>
+          <text x="60" y="40" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--ink)">38%</text>
+          <text x="165" y="25" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--ink)">44%</text>
+          <text x="270" y="17" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="var(--ink)">47%</text>
+          <text x="60" y="170" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-faint)">2023</text>
+          <text x="165" y="170" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-faint)">2024</text>
+          <text x="270" y="170" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-faint)">2025</text>
+        </svg>
+        <p class="chart-source">Source : Les Makers (2026)</p>
+      </div>
+      <div class="chart-card">
+        <p class="chart-title">Marché publicitaire podcast, États-Unis</p>
+        <svg viewBox="0 0 320 190" role="img" aria-label="Marché publicitaire podcast aux États-Unis : 106 millions de dollars en 2015, 2,9 milliards en 2025, 3,2 milliards prévus en 2026">
+          <line x1="20" y1="150" x2="300" y2="150" stroke="var(--line)" stroke-width="1"/>
+          <rect x="48" y="146" width="44" height="4" rx="2" fill="var(--value)"/>
+          <rect x="143" y="50" width="44" height="100" rx="2" fill="var(--value)"/>
+          <rect x="238" y="40" width="44" height="110" rx="2" fill="var(--value)"/>
+          <text x="70" y="138" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--ink)">106 M$</text>
+          <text x="165" y="42" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--ink)">2,9 Md$</text>
+          <text x="260" y="32" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--ink)">3,2 Md$+</text>
+          <text x="70" y="170" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-faint)">2015</text>
+          <text x="165" y="170" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-faint)">2025</text>
+          <text x="260" y="170" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-faint)">2026 (prév.)</text>
+        </svg>
+        <p class="chart-source">Source : IAB (2026)</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="argument-sec">
+    <div class="sec-head"><h2>Une audience qui a le profil de vos clients</h2></div>
+    <p class="lede">Les décideurs sont déjà à l'écoute, souvent sur leurs temps morts : transports, sport, déplacements.</p>
+
+    <div class="stat-row">
+      <div class="stat-tile">
+        <span class="stat-num">43-60 %</span>
+        <span class="stat-label">des décideurs B2B écoutent régulièrement des podcasts professionnels</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num">41 %</span>
+        <span class="stat-label">des auditeurs appartiennent aux catégories socio-professionnelles supérieures (CSP+)</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num">45 ans</span>
+        <span class="stat-label">âge moyen de l'auditeur type de podcast en France</span>
+      </div>
+    </div>
+    <p class="stat-source">Sources : illustre!, Onetwo (2025-2026)</p>
+  </section>
+
+  <section class="usage-sec">
+    <div class="sec-head"><h2>Pourquoi un podcast pour votre entreprise ?</h2></div>
+    <p class="lede">Ce n'est plus un simple format média : c'est un outil de communication à part entière, utilisé aussi bien en interne qu'à l'externe.</p>
+
+    <div class="usage-grid">
+      <div class="usage-col">
+        <p class="group-label">En interne</p>
+        <div class="usage-item">
+          <span class="usage-item-title">Communication interne</span>
+          <p class="usage-item-desc">Expliquer les décisions, clarifier les arbitrages, faire circuler l'information sans la déformer.</p>
+        </div>
+        <div class="usage-item">
+          <span class="usage-item-title">Marque employeur</span>
+          <p class="usage-item-desc">Montrer les métiers, les parcours et la culture d'entreprise pour attirer et retenir les talents.</p>
+        </div>
+      </div>
+      <div class="usage-col">
+        <p class="group-label">En externe</p>
+        <div class="usage-item">
+          <span class="usage-item-title">Image de marque</span>
+          <p class="usage-item-desc">Construire une expertise reconnue et gagner la confiance de votre audience sur la durée.</p>
+        </div>
+        <div class="usage-item">
+          <span class="usage-item-title">Relation client</span>
+          <p class="usage-item-desc">Nourrir la relation avec vos clients entre deux achats, rester présent dans leur quotidien.</p>
+        </div>
+        <div class="usage-item">
+          <span class="usage-item-title">Prospection &amp; vente</span>
+          <p class="usage-item-desc">Ouvrir des conversations commerciales autrement, sans discours de vente direct.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bridge">
+    <p class="bridge-text">On vous accompagne dans cette aventure, avec toutes les prestations qu'on propose.</p>
+  </div>
 
   <nav class="dots">
     <a href="#s1" data-idx="0"><span></span>La salle</a>
@@ -311,7 +561,7 @@
 
   <section id="s1" class="sec">
     <div class="sec-head"><span class="sec-num">01</span><h2>La salle</h2></div>
-    <p class="lede">Un studio insonorisé, avec micros, caméras, éclairage et mixette inclus.</p>
+    <p class="lede">Un studio insonorisé, avec micros, caméras, éclairage et mixette inclus. Nous pouvons aussi nous déplacer dans vos locaux avec le même matériel.</p>
 
     <div class="feature-grid">
       <div class="feature-card">
@@ -344,9 +594,14 @@
         <span class="ft-title">Table de mixage</span>
         <p class="ft-desc">Contrôle des niveaux en direct et retour casque pour chaque intervenant pendant l'enregistrement.</p>
       </div>
+      <div class="feature-card">
+        <span class="ft-label">Sur site</span>
+        <span class="ft-title">On se déplace aussi</span>
+        <p class="ft-desc">Notre équipe vient enregistrer directement dans vos locaux, avec tout le matériel nécessaire.</p>
+      </div>
     </div>
 
-    <p class="callout">Le studio et le matériel sont sur place, réglés et prêts à l'usage le jour du tournage.</p>
+    <p class="callout">Le studio et le matériel sont sur place, réglés et prêts à l'usage le jour du tournage. En studio ou chez vous.</p>
   </section>
 
   <section id="s2" class="sec">
