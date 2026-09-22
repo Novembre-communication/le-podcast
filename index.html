@@ -146,6 +146,12 @@
   .mode-card.active .mode-mark{ color:var(--value); }
   .mode-variant[hidden]{ display:none; }
 
+  .studio-photo{
+    border-radius:16px; overflow:hidden; border:1px solid var(--line);
+    margin-bottom:1.8rem; background:var(--paper-raised);
+  }
+  .studio-photo img{ display:block; width:100%; height:auto; max-height:440px; object-fit:cover; }
+
   .dots{
     position:fixed;
     left:2rem;
@@ -603,6 +609,10 @@
     <div class="mode-variant" data-variant="studio">
       <div class="sec-head"><span class="sec-num">01</span><h2>La salle</h2></div>
       <p class="lede">Un studio insonorisé, avec micros, caméras, éclairage et mixette inclus.</p>
+
+      <div class="studio-photo">
+        <img src="studio.jpg" alt="Studio d'enregistrement podcast avec micros Shure, casques et éclairage" loading="lazy">
+      </div>
 
       <div class="feature-grid">
         <div class="feature-card">
