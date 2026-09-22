@@ -60,11 +60,11 @@
     font-size:clamp(2rem,4.6vw,3rem); font-weight:700; letter-spacing:-0.015em;
     line-height:1.14; max-width:30ch; color:var(--ink); margin-bottom:1.3rem;
   }
-  .hero-sub{ font-size:clamp(1.05rem,2vw,1.25rem); line-height:1.6; color:var(--ink-soft); max-width:44ch; }
+  .hero-sub{ font-size:clamp(1.05rem,2vw,1.25rem); line-height:1.6; color:var(--ink); max-width:44ch; }
 
   .chapter{ padding:3rem 0 0.5rem; }
   .chapter-title{ font-size:clamp(1.8rem,4vw,2.6rem); font-weight:700; color:var(--ink); line-height:1.15; max-width:22ch; margin-bottom:0.9rem; }
-  .chapter-sub{ font-size:clamp(1.02rem,1.8vw,1.18rem); line-height:1.6; color:var(--ink-soft); max-width:56ch; }
+  .chapter-sub{ font-size:clamp(1.02rem,1.8vw,1.18rem); line-height:1.6; color:var(--ink); max-width:56ch; }
 
   /* --- stats band --- */
   .stats-band{
@@ -79,7 +79,7 @@
   @media (max-width:760px){ .stats-inner{ grid-template-columns:repeat(2,1fr); } }
   .stat-tile{ display:flex; flex-direction:column; gap:0.4rem; }
   .stat-num{ font-size:clamp(1.7rem,4vw,2.3rem); font-weight:700; color:var(--value); line-height:1; }
-  .stat-label{ font-size:0.82rem; line-height:1.4; color:var(--ink-soft); }
+  .stat-label{ font-size:0.82rem; line-height:1.4; color:var(--ink); }
   .stats-source{ max-width:920px; margin:1.7rem auto 0; font-size:0.7rem; color:var(--ink-faint); }
 
   /* --- usage section --- */
@@ -94,7 +94,7 @@
     letter-spacing:0.06em; color:var(--ink-faint); display:block; margin-bottom:0.6rem;
   }
   .compare-card.highlight .compare-label{ color:var(--value); }
-  .compare-text{ font-size:0.95rem; line-height:1.55; color:var(--ink-soft); }
+  .compare-text{ font-size:0.95rem; line-height:1.55; color:var(--ink); }
   .compare-card.highlight .compare-text{ color:var(--ink); }
 
   .stat-row{
@@ -119,7 +119,7 @@
   .usage-item{ padding:1rem 0; border-bottom:1px solid var(--line); }
   .usage-item:last-child{ border-bottom:none; }
   .usage-item-title{ font-weight:600; color:var(--ink); margin-bottom:0.35rem; display:block; }
-  .usage-item-desc{ font-size:0.9rem; line-height:1.5; color:var(--ink-soft); }
+  .usage-item-desc{ font-size:0.9rem; line-height:1.5; color:var(--ink); }
 
   /* --- bridge / transition --- */
   .bridge{ padding:3.4rem 0 2rem; }
@@ -138,7 +138,7 @@
   .mode-card.active{ border-color:var(--value); background:var(--value-soft); }
   .mode-label{ font-size:1.15rem; font-weight:700; color:var(--ink); }
   .mode-card.active .mode-label{ color:var(--value); }
-  .mode-desc{ font-size:0.88rem; line-height:1.45; color:var(--ink-soft); }
+  .mode-desc{ font-size:0.88rem; line-height:1.45; color:var(--ink); }
   .mode-mark{
     font-family:"IBM Plex Mono",monospace; font-size:0.66rem; text-transform:uppercase;
     letter-spacing:0.06em; color:var(--ink-faint);
@@ -194,7 +194,7 @@
   .sec-head{ display:flex; align-items:baseline; gap:0.9rem; margin-bottom:1.6rem; flex-wrap:wrap; }
   .sec-num{ font-family:"IBM Plex Mono",monospace; font-size:0.85rem; color:var(--value); font-weight:600; }
   .sec-head h2{ font-size:clamp(1.4rem,3.2vw,1.9rem); font-weight:600; }
-  .lede{ font-size:1.08rem; line-height:1.7; color:var(--ink-soft); max-width:64ch; margin-bottom:1.6rem; }
+  .lede{ font-size:1.08rem; line-height:1.7; color:var(--ink); max-width:64ch; margin-bottom:1.6rem; }
 
   .callout{
     position:relative;
@@ -238,7 +238,7 @@
     letter-spacing:0.06em; color:var(--ink-faint);
   }
   .feature-card .ft-title{ font-family:"Poppins",sans-serif; font-size:1.03rem; font-weight:600; color:var(--ink); }
-  .feature-card .ft-desc{ font-size:0.87rem; line-height:1.5; color:var(--ink-soft); }
+  .feature-card .ft-desc{ font-size:0.87rem; line-height:1.5; color:var(--ink); }
 
   .actions{
     background:var(--paper-raised); border:1px solid var(--line); border-radius:12px;
@@ -246,22 +246,22 @@
   }
   .actions h3{ font-size:1.02rem; font-weight:600; margin-bottom:1rem; }
   .actions ol{ margin:0; padding-left:1.25rem; display:flex; flex-direction:column; gap:0.7rem; }
-  .actions li{ font-size:0.96rem; line-height:1.55; color:var(--ink-soft); }
+  .actions li{ font-size:0.96rem; line-height:1.55; color:var(--ink); }
   .actions li strong{ color:var(--ink); }
 
   .table-wrap{ overflow-x:auto; margin-bottom:1rem; }
   table{ width:100%; border-collapse:collapse; min-width:480px; }
   caption{
     text-align:left; font-family:"IBM Plex Mono",monospace; font-size:0.7rem;
-    text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint);
+    text-transform:uppercase; letter-spacing:0.06em; color:var(--ink);
     margin-bottom:0.6rem;
   }
   th,td{ text-align:left; padding:0.7rem 0.9rem; border-bottom:1px solid var(--line); font-size:0.92rem; }
   thead th{
     font-family:"IBM Plex Mono",monospace; font-size:0.72rem; text-transform:uppercase;
-    letter-spacing:0.05em; color:var(--ink-faint); font-weight:500;
+    letter-spacing:0.05em; color:var(--ink); font-weight:500;
   }
-  tbody th{ font-weight:500; color:var(--ink-soft); }
+  tbody th{ font-weight:500; color:var(--ink); }
   td.hi{ color:var(--value); font-weight:600; }
 
   .foot{
@@ -287,7 +287,7 @@
 
   .pack-detail{ margin-bottom:1.9rem; }
   .pack-detail ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:0.55rem; }
-  .pack-detail li{ font-size:0.94rem; line-height:1.5; color:var(--ink-soft); padding-left:1.15rem; position:relative; }
+  .pack-detail li{ font-size:0.94rem; line-height:1.5; color:var(--ink); padding-left:1.15rem; position:relative; }
   .pack-detail li::before{ content:"•"; position:absolute; left:0; color:var(--value); }
 
   .pack-vars{
@@ -297,7 +297,7 @@
   }
   @media (max-width:600px){ .pack-vars{ grid-template-columns:1fr; } }
   .pack-var{ display:flex; flex-direction:column; gap:0.65rem; }
-  .pack-var-label{ font-size:0.84rem; color:var(--ink-soft); }
+  .pack-var-label{ font-size:0.84rem; color:var(--ink); }
 
   .pack-breakdown{ display:flex; flex-direction:column; gap:0; margin-bottom:1.7rem; }
   .pack-row{
@@ -306,7 +306,7 @@
   }
   .pack-row .pack-item{ font-weight:600; color:var(--ink); min-width:100px; }
   .pack-row .pack-detail-text{ font-size:0.82rem; color:var(--ink-faint); flex:1; }
-  .pack-row .pack-amount{ font-family:"IBM Plex Mono",monospace; color:var(--ink-soft); white-space:nowrap; }
+  .pack-row .pack-amount{ font-family:"IBM Plex Mono",monospace; color:var(--ink); white-space:nowrap; }
   .pack-row.pack-total{ border-bottom:none; padding-top:1rem; }
   .pack-row.pack-total .pack-item{ font-size:1.1rem; }
   .pack-row.pack-total .pack-amount{ font-size:1.6rem; font-weight:700; color:var(--value); }
@@ -321,6 +321,10 @@
     padding:0.8rem 0; border-bottom:1px solid var(--line); flex-wrap:wrap;
   }
   .option-row:last-child{ border-bottom:none; }
+
+  .option-sub{ padding:1rem 0 1.2rem; border-bottom:1px solid var(--line); }
+  .option-sub .pack-var-label{ font-size:0.82rem; margin-bottom:0.5rem; display:block; }
+  .option-note{ font-size:0.78rem; color:var(--ink); margin-top:0.7rem; }
 
   .toggle{ display:inline-flex; align-items:center; gap:0.7rem; cursor:pointer; user-select:none; }
   .toggle input{ position:absolute; opacity:0; width:1px; height:1px; }
@@ -338,7 +342,7 @@
   .toggle input:focus-visible + .toggle-track{ outline:2px solid var(--value); outline-offset:2px; }
   .toggle-label{ font-size:0.94rem; font-weight:500; color:var(--ink); }
 
-  .option-amount{ font-family:"IBM Plex Mono",monospace; font-size:0.95rem; font-weight:600; color:var(--ink-soft); white-space:nowrap; }
+  .option-amount{ font-family:"IBM Plex Mono",monospace; font-size:0.95rem; font-weight:600; color:var(--ink); white-space:nowrap; }
   .option-amount.quote{ font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); font-weight:600; }
 
   .quote-export{
@@ -763,7 +767,26 @@
   </section>
 
   <section id="s7" class="sec">
-    <div class="sec-head"><span class="sec-num">07</span><h2>Suivi &amp; reporting</h2></div>
+    <div class="sec-head"><span class="sec-num">07</span><h2>Achat média</h2></div>
+    <p class="lede">Des campagnes publicitaires ciblées sur YouTube ou Instagram. On active le ou les leviers utiles selon votre objectif, pas un parcours imposé.</p>
+
+    <div class="table-wrap">
+      <table>
+        <caption>Trois leviers, activables séparément ou ensemble</caption>
+        <thead>
+          <tr><th>Levier</th><th>Ce que ça fait</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Notoriété</th><td>Faire découvrir le podcast à de nouvelles audiences</td></tr>
+          <tr><th scope="row">Considération</th><td>Recibler les audiences qui ont déjà vu du contenu, pour les faire revenir</td></tr>
+          <tr><th scope="row">Conversion</th><td>Transformer les vues en leads, abonnés ou clients</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="s8" class="sec">
+    <div class="sec-head"><span class="sec-num">08</span><h2>Suivi &amp; reporting</h2></div>
     <p class="lede">Un point de suivi après chaque diffusion : ce qui a été vu, écouté et partagé.</p>
 
     <div class="feature-grid">
@@ -849,6 +872,11 @@
         <span class="pack-detail-text" id="diffusionDetail"></span>
         <span class="pack-amount" id="diffusionPrix"></span>
       </div>
+      <div class="pack-row" id="mediaRow" hidden>
+        <span class="pack-item">Achat média</span>
+        <span class="pack-detail-text" id="mediaDetail"></span>
+        <span class="pack-amount" id="mediaPrix"></span>
+      </div>
       <div class="pack-row pack-total">
         <span class="pack-item">Total pack</span>
         <span class="pack-detail-text"></span>
@@ -895,6 +923,25 @@
           <span class="toggle-label">Suivi &amp; reporting</span>
         </label>
         <span class="option-amount quote">Sur devis</span>
+      </div>
+
+      <div class="option-row" data-item="media">
+        <label class="toggle">
+          <input type="checkbox" class="opt-check">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label">Achat média</span>
+        </label>
+        <span class="option-amount" id="mediaOptAmount"></span>
+      </div>
+      <div class="option-sub" id="mediaSub" hidden>
+        <div class="pack-var">
+          <span class="pack-var-label">Budget média (payé à YouTube)</span>
+          <div class="stepper" data-role="media">
+            <button class="stepper-btn" data-action="dec" aria-label="Réduire le budget">−</button>
+            <span class="stepper-value" data-role="value"></span>
+            <button class="stepper-btn" data-action="inc" aria-label="Augmenter le budget">+</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -960,8 +1007,12 @@
     var MONTAGE_RATIO = 8;
     var VISUELS_PRIX = 350;
     var DIFFUSION_PRIX_UNITAIRE = 150;
-    var pack = { dureeMin: 60, nombre: 1, dureeStep: 20, dureeFloor: 20, dureeCeil: 240, nombreMin: 1, nombreMax: 8 };
-    var options = { jingle: false, visuels: false, diffusion: false, suivi: false };
+    var MEDIA_TAUX_GESTION = 0.075;
+    var MEDIA_PILOTAGE_H = 2;
+    var MEDIA_TAUX_HORAIRE = 95;
+    var pack = { dureeMin: 60, nombre: 1, dureeStep: 20, dureeFloor: 20, dureeCeil: 240, nombreMin: 1, nombreMax: 8,
+      mediaBudget: 5000, mediaStep: 500, mediaFloor: 1000, mediaCeil: 10000 };
+    var options = { jingle: false, visuels: false, diffusion: false, suivi: false, media: false };
 
     function fmt(n){ return Math.round(n).toLocaleString('fr-FR') + ' €'; }
     function fmtDuree(minutes){
@@ -978,9 +1029,11 @@
       var sallePrix = (tournageMin / 60) * SALLE_RATE;
       var videastePrix = (tournageMin / 60) * VIDEASTE_RATE;
       var montagePrix = (montageMin / 60) * VIDEASTE_RATE;
+      var mediaFraisGestion = pack.mediaBudget * MEDIA_TAUX_GESTION + MEDIA_PILOTAGE_H * MEDIA_TAUX_HORAIRE;
       var total = sallePrix + videastePrix + montagePrix;
       if(options.visuels) total += VISUELS_PRIX;
       if(options.diffusion) total += diffusionPrix;
+      if(options.media) total += mediaFraisGestion;
       return {
         tournageMin: tournageMin,
         montageMin: montageMin,
@@ -988,6 +1041,7 @@
         videastePrix: videastePrix,
         montagePrix: montagePrix,
         diffusionPrix: diffusionPrix,
+        mediaFraisGestion: mediaFraisGestion,
         total: total,
         quoteCount: (options.jingle ? 1 : 0) + (options.suivi ? 1 : 0)
       };
@@ -1016,6 +1070,14 @@
       document.getElementById('diffusionPrix').textContent = fmt(c.diffusionPrix);
       document.getElementById('diffusionOptAmount').textContent = fmt(c.diffusionPrix);
 
+      document.querySelector('[data-role="media"] [data-role="value"]').textContent = fmt(pack.mediaBudget);
+      document.getElementById('mediaRow').hidden = !options.media;
+      document.getElementById('mediaDetail').textContent =
+        'Budget média ' + fmt(pack.mediaBudget) + ' (payé à YouTube), gestion Novembre incluse ci-contre';
+      document.getElementById('mediaPrix').textContent = fmt(c.mediaFraisGestion);
+      document.getElementById('mediaOptAmount').textContent = fmt(c.mediaFraisGestion) + ' de gestion';
+      document.getElementById('mediaSub').hidden = !options.media;
+
       document.getElementById('packTotal').textContent = fmt(c.total);
 
       var note = document.getElementById('packNote');
@@ -1034,6 +1096,8 @@
           var delta = btn.dataset.action === 'inc' ? 1 : -1;
           if(role === 'duree'){
             pack.dureeMin = Math.max(pack.dureeFloor, Math.min(pack.dureeCeil, pack.dureeMin + delta * pack.dureeStep));
+          } else if(role === 'media'){
+            pack.mediaBudget = Math.max(pack.mediaFloor, Math.min(pack.mediaCeil, pack.mediaBudget + delta * pack.mediaStep));
           } else {
             pack.nombre = Math.max(pack.nombreMin, Math.min(pack.nombreMax, pack.nombre + delta));
           }
@@ -1069,11 +1133,12 @@
       lines.push('Vidéaste (' + tournageLabel + ' × ' + VIDEASTE_RATE + ' €/h) : ' + fmt(c.videastePrix));
       lines.push('Montage (' + pack.nombre + ' podcast' + (pack.nombre > 1 ? 's' : '') + ' × ' + fmtDuree(pack.dureeMin) + ' × 8 = ' + fmtDuree(c.montageMin) + ') : ' + fmt(c.montagePrix));
 
-      if(options.visuels || options.diffusion){
+      if(options.visuels || options.diffusion || options.media){
         lines.push('');
         lines.push('OPTIONS');
         if(options.visuels) lines.push('Visuels & identité : ' + fmt(VISUELS_PRIX));
         if(options.diffusion) lines.push('Diffusion (' + pack.nombre + ' épisode' + (pack.nombre > 1 ? 's' : '') + ' × 150 €) : ' + fmt(c.diffusionPrix));
+        if(options.media) lines.push('Achat média : budget ' + fmt(pack.mediaBudget) + ' (payé à YouTube) + gestion Novembre ' + fmt(c.mediaFraisGestion));
       }
 
       if(options.jingle || options.suivi){
