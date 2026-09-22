@@ -882,11 +882,6 @@
         <span class="pack-detail-text" id="diffusionDetail"></span>
         <span class="pack-amount" id="diffusionPrix"></span>
       </div>
-      <div class="pack-row" id="mediaRow" hidden>
-        <span class="pack-item">Achat média</span>
-        <span class="pack-detail-text" id="mediaDetail"></span>
-        <span class="pack-amount" id="mediaPrix"></span>
-      </div>
       <div class="pack-row pack-total">
         <span class="pack-item">Total pack</span>
         <span class="pack-detail-text"></span>
@@ -939,19 +934,9 @@
         <label class="toggle">
           <input type="checkbox" class="opt-check">
           <span class="toggle-track"><span class="toggle-thumb"></span></span>
-          <span class="toggle-label">Achat média</span>
+          <span class="toggle-label">Budget média</span>
         </label>
-        <span class="option-amount" id="mediaOptAmount"></span>
-      </div>
-      <div class="option-sub" id="mediaSub" hidden>
-        <div class="pack-var">
-          <span class="pack-var-label">Budget média (payé à YouTube)</span>
-          <div class="stepper" data-role="media">
-            <button class="stepper-btn" data-action="dec" aria-label="Réduire le budget">−</button>
-            <span class="stepper-value" data-role="value"></span>
-            <button class="stepper-btn" data-action="inc" aria-label="Augmenter le budget">+</button>
-          </div>
-        </div>
+        <span class="option-amount quote">Sur devis</span>
       </div>
     </div>
 
@@ -1017,11 +1002,7 @@
     var MONTAGE_RATIO = 8;
     var VISUELS_PRIX = 350;
     var DIFFUSION_PRIX_UNITAIRE = 150;
-    var MEDIA_TAUX_GESTION = 0.075;
-    var MEDIA_PILOTAGE_H = 2;
-    var MEDIA_TAUX_HORAIRE = 95;
-    var pack = { dureeMin: 60, nombre: 1, dureeStep: 20, dureeFloor: 20, dureeCeil: 240, nombreMin: 1, nombreMax: 8,
-      mediaBudget: 5000, mediaStep: 500, mediaFloor: 1000, mediaCeil: 10000 };
+    var pack = { dureeMin: 60, nombre: 1, dureeStep: 20, dureeFloor: 20, dureeCeil: 240, nombreMin: 1, nombreMax: 8 };
     var options = { jingle: false, visuels: false, diffusion: false, suivi: false, media: false };
 
     function fmt(n){ return Math.round(n).toLocaleString('fr-FR') + ' €'; }
@@ -1039,11 +1020,9 @@
       var sallePrix = (tournageMin / 60) * SALLE_RATE;
       var videastePrix = (tournageMin / 60) * VIDEASTE_RATE;
       var montagePrix = (montageMin / 60) * VIDEASTE_RATE;
-      var mediaFraisGestion = pack.mediaBudget * MEDIA_TAUX_GESTION + MEDIA_PILOTAGE_H * MEDIA_TAUX_HORAIRE;
       var total = sallePrix + videastePrix + montagePrix;
       if(options.visuels) total += VISUELS_PRIX;
       if(options.diffusion) total += diffusionPrix;
-      if(options.media) total += mediaFraisGestion;
       return {
         tournageMin: tournageMin,
         montageMin: montageMin,
@@ -1051,9 +1030,8 @@
         videastePrix: videastePrix,
         montagePrix: montagePrix,
         diffusionPrix: diffusionPrix,
-        mediaFraisGestion: mediaFraisGestion,
         total: total,
-        quoteCount: (options.jingle ? 1 : 0) + (options.suivi ? 1 : 0)
+        quoteCount: (options.jingle ? 1 : 0) + (options.suivi ? 1 : 0) + (options.media ? 1 : 0)
       };
     }
 
@@ -1080,14 +1058,6 @@
       document.getElementById('diffusionPrix').textContent = fmt(c.diffusionPrix);
       document.getElementById('diffusionOptAmount').textContent = fmt(c.diffusionPrix);
 
-      document.querySelector('[data-role="media"] [data-role="value"]').textContent = fmt(pack.mediaBudget);
-      document.getElementById('mediaRow').hidden = !options.media;
-      document.getElementById('mediaDetail').textContent =
-        'Budget média ' + fmt(pack.mediaBudget) + ' (payé à YouTube), gestion Novembre incluse ci-contre';
-      document.getElementById('mediaPrix').textContent = fmt(c.mediaFraisGestion);
-      document.getElementById('mediaOptAmount').textContent = fmt(c.mediaFraisGestion) + ' de gestion';
-      document.getElementById('mediaSub').hidden = !options.media;
-
       document.getElementById('packTotal').textContent = fmt(c.total);
 
       var note = document.getElementById('packNote');
@@ -1106,8 +1076,6 @@
           var delta = btn.dataset.action === 'inc' ? 1 : -1;
           if(role === 'duree'){
             pack.dureeMin = Math.max(pack.dureeFloor, Math.min(pack.dureeCeil, pack.dureeMin + delta * pack.dureeStep));
-          } else if(role === 'media'){
-            pack.mediaBudget = Math.max(pack.mediaFloor, Math.min(pack.mediaCeil, pack.mediaBudget + delta * pack.mediaStep));
           } else {
             pack.nombre = Math.max(pack.nombreMin, Math.min(pack.nombreMax, pack.nombre + delta));
           }
@@ -1143,19 +1111,19 @@
       lines.push('Vidéaste (' + tournageLabel + ' × ' + VIDEASTE_RATE + ' €/h) : ' + fmt(c.videastePrix));
       lines.push('Montage (' + pack.nombre + ' podcast' + (pack.nombre > 1 ? 's' : '') + ' × ' + fmtDuree(pack.dureeMin) + ' × 8 = ' + fmtDuree(c.montageMin) + ') : ' + fmt(c.montagePrix));
 
-      if(options.visuels || options.diffusion || options.media){
+      if(options.visuels || options.diffusion){
         lines.push('');
         lines.push('OPTIONS');
         if(options.visuels) lines.push('Visuels & identité : ' + fmt(VISUELS_PRIX));
         if(options.diffusion) lines.push('Diffusion (' + pack.nombre + ' épisode' + (pack.nombre > 1 ? 's' : '') + ' × 150 €) : ' + fmt(c.diffusionPrix));
-        if(options.media) lines.push('Achat média : budget ' + fmt(pack.mediaBudget) + ' (payé à YouTube) + gestion Novembre ' + fmt(c.mediaFraisGestion));
       }
 
-      if(options.jingle || options.suivi){
+      if(options.jingle || options.suivi || options.media){
         lines.push('');
         lines.push('SUR DEVIS (à confirmer)');
         if(options.jingle) lines.push('Le jingle');
         if(options.suivi) lines.push('Suivi & reporting');
+        if(options.media) lines.push('Budget média');
       }
 
       lines.push('');
